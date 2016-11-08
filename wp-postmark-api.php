@@ -64,46 +64,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return json_decode( $body );
 		}
 
-		/* MESSAGE OPENS. */
-
-
-		/**
-		 * search_message_opens function.
-		 *
-		 * @access public
-		 * @param mixed $count
-		 * @param mixed $offset
-		 * @param mixed $recipient
-		 * @param mixed $tag
-		 * @param mixed $client_name
-		 * @param mixed $client_company
-		 * @param mixed $client_family
-		 * @param mixed $os_name
-		 * @param mixed $os_family
-		 * @param mixed $os_company
-		 * @param mixed $platform
-		 * @param mixed $country
-		 * @param mixed $region
-		 * @param mixed $city
-		 * @return void
-		 */
-		public function search_message_opens( $count, $offset, $recipient, $tag, $client_name, $client_company, $client_family, $os_name, $os_family, $os_company, $platform, $country, $region, $city ) {
-
-		}
-
-		/**
-		 * get_message_opens function.
-		 *
-		 * @access public
-		 * @param mixed $message_id
-		 * @param mixed $count
-		 * @param mixed $offset
-		 * @return void
-		 */
-		public function get_message_opens( $message_id, $count, $offset ) {
-
-		}
-
 		/* EMAIL. */
 
 		/**
@@ -195,6 +155,107 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		public function edit_template( $template_id, $subject, $html_body, $text_body ) {
 
 		}
+
+		/* SERVERS. */
+
+		/**
+		 * get_server function.
+		 *
+		 * @access public
+		 * @return void
+		 */
+		public function get_the_server() {
+
+		}
+
+		/**
+		 * edit_server function.
+		 *
+		 * @access public
+		 * @param mixed $name
+		 * @param mixed $color
+		 * @param mixed $raw_email_enabled
+		 * @param mixed $smtp_api_activated
+		 * @param mixed $inbound_hook_url
+		 * @param mixed $bounce_hook_url
+		 * @param mixed $open_hook_url
+		 * @param mixed $post_first_open_only
+		 * @param mixed $track_opens
+		 * @param mixed $track_links
+		 * @param mixed $inbound_domain
+		 * @param mixed $inbound_spam_threshold
+		 * @return void
+		 */
+		public function edit_the_server( $name, $color, $raw_email_enabled, $smtp_api_activated, $inbound_hook_url, $bounce_hook_url, $open_hook_url, $post_first_open_only, $track_opens, $track_links, $inbound_domain, $inbound_spam_threshold ) {
+
+		}
+
+		public function get_server( $server_id ) {
+
+		}
+
+		public function add_server( $name, $color, $raw_email_enabled, $smtp_api_activated, $inbound_hook_url, $bounce_hook_url, $open_hook_url, $post_first_open_only, $track_opens, $track_links, $inbound_domain, $inbound_spam_threshold ) {
+
+		}
+
+		public function list_servers( $count, $offset, $name = null ) {
+
+		}
+
+		public function delete_server( $server_id ) {
+
+		}
+
+
+		/* MESSAGES. */
+
+		/**
+		 * search_message_opens function.
+		 *
+		 * @access public
+		 * @param mixed $count
+		 * @param mixed $offset
+		 * @param mixed $recipient
+		 * @param mixed $tag
+		 * @param mixed $client_name
+		 * @param mixed $client_company
+		 * @param mixed $client_family
+		 * @param mixed $os_name
+		 * @param mixed $os_family
+		 * @param mixed $os_company
+		 * @param mixed $platform
+		 * @param mixed $country
+		 * @param mixed $region
+		 * @param mixed $city
+		 * @return void
+		 */
+		public function search_message_opens( $count, $offset, $recipient, $tag, $client_name, $client_company, $client_family, $os_name, $os_family, $os_company, $platform, $country, $region, $city ) {
+
+		}
+
+		/**
+		 * get_message_opens function.
+		 *
+		 * @access public
+		 * @param mixed $message_id
+		 * @param mixed $count
+		 * @param mixed $offset
+		 * @return void
+		 */
+		public function get_message_opens( $message_id, $count, $offset ) {
+
+		}
+
+		/* DOMAINS. */
+
+		/* SENDER SIGNATURES */
+
+		/* STATS. */
+
+		/* TRIGGERS. */
+
+		/* WEBHOOKS. */
+
 
 	}
 
