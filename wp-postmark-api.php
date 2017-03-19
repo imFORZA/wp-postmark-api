@@ -156,6 +156,14 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		}
 
+		public function validate_template() {
+
+		}
+
+		public function send_email_with_template() {
+
+		}
+
 		/* SERVERS. */
 
 		/**
@@ -248,7 +256,62 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* DOMAINS. */
 
+		public function list_domains() {
+
+		}
+		public function get_domain_details() {
+
+		}
+
+		public function add_domain() {
+
+		}
+
+		public function edit_domain() {
+
+		}
+
+		public function delete_domain() {
+
+		}
+
+		public function verify_spf_record() {
+
+		}
+
+		public function rotate_dkim_keys() {
+
+		}
+
 		/* SENDER SIGNATURES */
+
+		public function list_sender_signatures() {
+
+		}
+
+		public function get_sender_signatures_details() {
+
+		}
+
+		public function create_signature() {
+
+		}
+
+		public function edit_signature() {
+
+		}
+
+		public function delete_signature() {
+
+		}
+
+		public function resend_confirmation() {
+
+		}
+
+		public function verify_sender_sig_spf_record() {
+
+		}
 
 		/* STATS. */
 
