@@ -252,7 +252,93 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* STATS. */
 
+		public function get_outbound_stats( $tag, $fromdate, $todate ) {
+
+		}
+
+		public function get_send_counts() {
+
+		}
+
+		public function get_bounce_counts() {
+
+		}
+
+		public function get_spam_complaints() {
+
+		}
+
+		public function get_tracked_email_counts() {
+
+		}
+
+		public function get_email_open_counts() {
+
+		}
+
+		public function get_email_platform_usage() {
+
+		}
+
+		public function get_email_client_usage() {
+
+		}
+
+		public function get_email_read_times() {
+
+		}
+
+		public function get_click_counts() {
+
+		}
+
+		public function get_browser_usage() {
+
+		}
+
+		public function get_browser_platform_usage() {
+
+		}
+
+		public function get_click_location() {
+
+		}
+
 		/* TRIGGERS. */
+
+		public function create_trigger_for_tag() {
+
+		}
+
+		public function get_single_trigger() {
+
+		}
+
+		public function edit_single_trigger() {
+
+		}
+
+		public function delete_single_trigger() {
+
+		}
+
+		public function search_triggers() {
+
+		}
+
+		/* Inbound Rules Triggers */
+
+		public function create_trigger_for_inbound_rule() {
+
+		}
+
+		public function delete_single_inbound_trigger() {
+
+		}
+
+		public function list_inbound_triggers() {
+
+		}
 
 		/* WEBHOOKS. */
 
