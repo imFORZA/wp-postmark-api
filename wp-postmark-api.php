@@ -37,6 +37,18 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		protected $base_uri = 'https://api.postmarkapp.com';
 
 
+		/**
+		 * SpamCheck URL
+		 * Docs: http://spamcheck.postmarkapp.com/doc
+		 *
+		 * (default value: 'http://spamcheck.postmarkapp.com')
+		 *
+		 * @var string
+		 * @access protected
+		 */
+		protected $spamcheck_uri = 'http://spamcheck.postmarkapp.com';
+
+
 		public function __construct(  ) {
 
 
@@ -90,6 +102,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return void
 		 */
 		public function send_email( $from, $to, $cc, $bcc, $subject, $tag, $html_body, $text_body, $replyto, $headers, $track_opens, $track_links, $attachments ) {
+
+
 
 		}
 
@@ -408,6 +422,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/* WEBHOOKS. */
+
+		/* SPAMCHECK */
 
 
 	}
