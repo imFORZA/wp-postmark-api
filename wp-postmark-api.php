@@ -22,6 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /* Check if class exists. */
 if ( ! class_exists( 'PostMarkAPI' ) ) {
 
+
+	/**
+	 * PostMarkAPI class.
+	 */
 	class PostMarkAPI {
 
 		/**
@@ -67,22 +71,22 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* EMAIL. */
 
 		/**
-		 * send_email function.
+		 * Send a Single Email.
 		 *
 		 * @access public
-		 * @param mixed $from
-		 * @param mixed $to
-		 * @param mixed $cc
-		 * @param mixed $bcc
-		 * @param mixed $subject
-		 * @param mixed $tag
-		 * @param mixed $html_body
-		 * @param mixed $text_body
-		 * @param mixed $replyto
-		 * @param mixed $headers
-		 * @param mixed $track_opens
-		 * @param mixed $track_links
-		 * @param mixed $attachments
+		 * @param mixed $from [REQUIRED] The sender email address. Must have a registered and confirmed Sender Signature.
+		 * @param mixed $to [REQUIRED] Recipient email address. Multiple addresses are comma seperated. Max 50.
+		 * @param mixed $cc Cc recipient email address. Multiple addresses are comma seperated. Max 50.
+		 * @param mixed $bcc Bcc recipient email address. Multiple addresses are comma seperated. Max 50.
+		 * @param mixed $subject Email subject
+		 * @param mixed $tag Email tag that allows you to categorize outgoing emails and get detailed statistics.
+		 * @param mixed $html_body [REQUIRED] HTML email message (If no TextBody specified)
+		 * @param mixed $text_body [REQUIRED] Plain text email message (If no HtmlBody specified)
+		 * @param mixed $replyto Reply To override email address. Defaults to the Reply To set in the sender signature.
+		 * @param mixed $headers List of custom headers to include.
+		 * @param mixed $track_opens Activate open tracking for this email.
+		 * @param mixed $track_links Activate link tracking for links in the HTML or Text bodies of this email.
+		 * @param mixed $attachments 	List of attachments
 		 * @return void
 		 */
 		public function send_email( $from, $to, $cc, $bcc, $subject, $tag, $html_body, $text_body, $replyto, $headers, $track_opens, $track_links, $attachments ) {
@@ -90,22 +94,22 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * send_batch_emails function.
+		 * Send Batch Emails.
 		 *
 		 * @access public
-		 * @param mixed $from
-		 * @param mixed $to
-		 * @param mixed $cc
-		 * @param mixed $bcc
-		 * @param mixed $subject
-		 * @param mixed $tag
-		 * @param mixed $html_body
-		 * @param mixed $text_body
-		 * @param mixed $replyto
-		 * @param mixed $headers
-		 * @param mixed $track_opens
-		 * @param mixed $track_links
-		 * @param mixed $attachments
+		 * @param mixed $from [REQUIRED] The sender email address. Must have a registered and confirmed Sender Signature.
+		 * @param mixed $to [REQUIRED] Recipient email address. Multiple addresses are comma seperated. Max 50.
+		 * @param mixed $cc Cc recipient email address. Multiple addresses are comma seperated. Max 50.
+		 * @param mixed $bcc Bcc recipient email address. Multiple addresses are comma seperated. Max 50.
+		 * @param mixed $subject Email subject
+		 * @param mixed $tag Email tag that allows you to categorize outgoing emails and get detailed statistics.
+		 * @param mixed $html_body [REQUIRED] HTML email message (If no TextBody specified)
+		 * @param mixed $text_body [REQUIRED] Plain text email message (If no HtmlBody specified)
+		 * @param mixed $replyto Reply To override email address. Defaults to the Reply To set in the sender signature.
+		 * @param mixed $headers List of custom headers to include.
+		 * @param mixed $track_opens Activate open tracking for this email.
+		 * @param mixed $track_links Activate link tracking for links in the HTML or Text bodies of this email.
+		 * @param mixed $attachments 	List of attachments
 		 * @return void
 		 */
 		public function send_batch_emails( $from, $to, $cc, $bcc, $subject, $tag, $html_body, $text_body, $replyto, $headers, $track_opens, $track_links, $attachments ) {
