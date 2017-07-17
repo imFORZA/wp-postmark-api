@@ -53,9 +53,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 
 			$this->args['headers'] = array(
+				'Accept' => 'application/json',
 				'Content-Type' => 'application/json',
-				'X-Postmark-Account-Token' => '',
-				'X-Postmark-Server-Token' => ''
+				'X-Postmark-Account-Token' => $account_token,
+				'X-Postmark-Server-Token' => $server_token
 			);
 		}
 
@@ -408,6 +409,18 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 */
 		public function search_message_opens( $count, $offset, $recipient, $tag, $client_name, $client_company, $client_family, $os_name, $os_family, $os_company, $platform, $country, $region, $city ) {
 
+		}
+
+		/**
+		 * Get Outbound Message Details
+		 *
+		 * @access public
+		 * @param mixed $message_id
+		 * @return void
+		 */
+		public function get_outbound_message_details( $message_id ) {
+			$request = $this->base_uri . '/messages/outbound/'.$message_id.'/details';
+			return $this->fetch( $request );
 		}
 
 		/**
