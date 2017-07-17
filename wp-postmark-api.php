@@ -162,7 +162,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 
 		/**
-		 * get_delivery_stats function.
+		 * Get Delivery Stats.
 		 *
 		 * @access public
 		 * @return void
@@ -175,18 +175,18 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_bounces function.
+		 * Get Bounces.
 		 *
 		 * @access public
-		 * @param mixed $count
-		 * @param mixed $offset
-		 * @param string $type (default: '')
-		 * @param string $inactive (default: '')
-		 * @param string $email_filter (default: '')
-		 * @param string $tag (default: '')
-		 * @param string $message_id (default: '')
-		 * @param string $from_date (default: '')
-		 * @param string $to_date (default: '')
+		 * @param mixed $count Count.
+		 * @param mixed $offset Offset.
+		 * @param string $type (default: '') Type.
+		 * @param string $inactive (default: '') Inactive.
+		 * @param string $email_filter (default: '') Email Filter.
+		 * @param string $tag (default: '') Tag.
+		 * @param string $message_id (default: '') Message ID.
+		 * @param string $from_date (default: '') From Date.
+		 * @param string $to_date (default: '') To Date.
 		 * @return void
 		 */
 		public function get_bounces( $count, $offset, $type = '', $inactive = '', $email_filter = '', $tag = '', $message_id = '', $from_date = '', $to_date = '' ) {
@@ -197,10 +197,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_bounce function.
+		 * Get a specific bounce by id.
 		 *
 		 * @access public
-		 * @param mixed $bounce_id
+		 * @param mixed $bounce_id Bounce ID.
 		 * @return void
 		 */
 		public function get_bounce( $bounce_id ) {
@@ -211,10 +211,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_bounce_dump function.
+		 * Get Bounce Dump.
 		 *
 		 * @access public
-		 * @param mixed $bounce_id
+		 * @param mixed $bounce_id Bounce ID.
 		 * @return void
 		 */
 		public function get_bounce_dump( $bounce_id ) {
@@ -225,10 +225,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * activate_bounce function.
+		 * Activate Bounce.
 		 *
 		 * @access public
-		 * @param mixed $bounce_id
+		 * @param mixed $bounce_id Bounce ID.
 		 * @return void
 		 */
 		public function activate_bounce( $bounce_id ) {
@@ -239,7 +239,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_bounced_tags function.
+		 * Get Bounced Tags.
 		 *
 		 * @access public
 		 * @return void
@@ -254,11 +254,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* TEMPLATES. */
 
 		/**
-		 * get_templates function.
+		 * Get Templates.
 		 *
 		 * @access public
-		 * @param mixed $count
-		 * @param mixed $offset
+		 * @param mixed $count Count.
+		 * @param mixed $offset Offset.
 		 * @return void
 		 */
 		public function get_templates( $count, $offset ) {
@@ -269,10 +269,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_template function.
+		 * Get Template by ID.
 		 *
 		 * @access public
-		 * @param mixed $template_id
+		 * @param mixed $template_id Template ID.
 		 * @return void
 		 */
 		public function get_template( $template_id ) {
@@ -307,7 +307,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* SERVERS. */
 
 		/**
-		 * get_server function.
+		 * Get Server.
 		 *
 		 * @access public
 		 * @return void
@@ -426,11 +426,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* DOMAINS. */
 
 		/**
-		 * list_domains function.
+		 * List Domains.
 		 *
 		 * @access public
-		 * @param int $count (default: 500)
-		 * @param int $offset (default: 0)
+		 * @param int $count (default: 500) Count. Max 500
+		 * @param int $offset (default: 0) Offset.
 		 * @return void
 		 */
 		public function list_domains( $count = 500, $offset = 0 ) {
@@ -441,7 +441,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_domain_details function.
+		 * Get Domain Details.
 		 *
 		 * @access public
 		 * @param mixed $domain_id
@@ -522,67 +522,184 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* STATS. */
 
+		/**
+		 * get_outbound_stats function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
 		public function get_outbound_stats( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound';
 			return $this->fetch( $request );
 		}
 
-		public function get_send_counts() {
+		/**
+		 * get_send_counts function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_send_counts( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/sends';
 			return $this->fetch( $request );
 		}
 
-		public function get_bounce_counts() {
+		/**
+		 * get_bounce_counts function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_bounce_counts( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/bounce';
 			return $this->fetch( $request );
 		}
 
-		public function get_spam_complaints() {
+		/**
+		 * get_spam_complaints function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_spam_complaints( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/spam';
 			return $this->fetch( $request );
 		}
 
-		public function get_tracked_email_counts() {
+		/**
+		 * get_tracked_email_counts function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_tracked_email_counts( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/tracked';
 			return $this->fetch( $request );
 		}
 
-		public function get_email_open_counts() {
+		/**
+		 * get_email_open_counts function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_email_open_counts( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/opens';
 			return $this->fetch( $request );
 		}
 
-		public function get_email_platform_usage() {
+		/**
+		 * get_email_platform_usage function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_email_platform_usage( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/opens/platforms';
 			return $this->fetch( $request );
 		}
 
-		public function get_email_client_usage() {
+		/**
+		 * get_email_client_usage function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_email_client_usage( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/opens/emailclients';
 			return $this->fetch( $request );
 		}
 
-		public function get_email_read_times() {
+		/**
+		 * get_email_read_times function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_email_read_times( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/opens/readtimes';
 			return $this->fetch( $request );
 		}
 
-		public function get_click_counts() {
+		/**
+		 * get_click_counts function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_click_counts( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/clicks';
 			return $this->fetch( $request );
 		}
 
-		public function get_browser_usage() {
+		/**
+		 * get_browser_usage function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_browser_usage( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/clicks/browserfamilies';
 			return $this->fetch( $request );
 		}
 
-		public function get_browser_platform_usage() {
+		/**
+		 * get_browser_platform_usage function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_browser_platform_usage( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/clicks/platforms';
 			return $this->fetch( $request );
 		}
 
-		public function get_click_location() {
+		/**
+		 * get_click_location function.
+		 *
+		 * @access public
+		 * @param mixed $tag
+		 * @param mixed $from_date
+		 * @param mixed $to_date
+		 * @return void
+		 */
+		public function get_click_location( $tag, $from_date, $to_date ) {
 			$request = $this->base_uri . '/stats/outbound/clicks/location';
 			return $this->fetch( $request );
 		}
@@ -590,42 +707,63 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* TRIGGERS. */
 
 		public function create_trigger_for_tag() {
-
+			// POST /triggers/tags
 		}
 
 		public function get_single_trigger() {
-
+			// GET /triggers/tags/{triggerid}
 		}
 
 		public function edit_single_trigger() {
-
+			// PUT /triggers/tags/{triggerid}
 		}
 
 		public function delete_single_trigger() {
-
+			// DELETE /triggers/tags/{triggerid}
 		}
 
-		public function search_triggers() {
 
+		/**
+		 * Search Triggers.
+		 *
+		 * @access public
+		 * @param mixed $count Count.
+		 * @param mixed $offset Offset.
+		 * @param mixed $match_name Match Name.
+		 * @return void
+		 */
+		public function search_triggers( $count, $offset, $match_name ) {
+
+			$request = $this->base_uri . '/triggers/tags?match_name='.$match_name.'&count='.$count.'&offset=' . $offset;
+			return $this->fetch( $request );
 		}
 
 		/* Inbound Rules Triggers */
 
 		public function create_trigger_for_inbound_rule() {
-
+			// POST /triggers/inboundrules
 		}
 
 		public function delete_single_inbound_trigger() {
-
+			// DELETE /triggers/inboundrules/{triggerid}
 		}
 
-		public function list_inbound_triggers() {
-
+		/**
+		 * List Inbound Rule Triggers.
+		 *
+		 * @access public
+		 * @param mixed $count Count.
+		 * @param mixed $offset Offset.
+		 * @return void
+		 */
+		public function list_inbound_triggers( $count, $offset ) {
+			$request = $this->base_uri . '/triggers/inboundrules?count='.$count.'&offset=' . $offset;
+			return $this->fetch( $request );
 		}
 
 		/* WEBHOOKS. */
 
-		/* SPAMCHECK */
+		/* SPAMCHECK (http://spamcheck.postmarkapp.com/doc) */
 
 
 	}
