@@ -363,6 +363,15 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			// PUT /servers/{serverid}
 		}
 
+		/**
+		 * list_servers function.
+		 *
+		 * @access public
+		 * @param mixed $count
+		 * @param mixed $offset
+		 * @param mixed $name (default: null)
+		 * @return void
+		 */
 		public function list_servers( $count, $offset, $name = null ) {
 
 			$request = $this->base_uri . '/servers?count='.$count.'&offset=' . $offset . '&name=' . $name;
@@ -416,115 +425,166 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* DOMAINS. */
 
-		public function list_domains() {
+		/**
+		 * list_domains function.
+		 *
+		 * @access public
+		 * @param int $count (default: 500)
+		 * @param int $offset (default: 0)
+		 * @return void
+		 */
+		public function list_domains( $count = 500, $offset = 0 ) {
+
+			$request = $this->base_uri . '/domains?count='.$count.'&offset=' . $offset;
+			return $this->fetch( $request );
 
 		}
-		public function get_domain_details() {
+
+		/**
+		 * get_domain_details function.
+		 *
+		 * @access public
+		 * @param mixed $domain_id
+		 * @return void
+		 */
+		public function get_domain_details( $domain_id ) {
+
+			$request = $this->base_uri . '/domains/'. $domain_id;
+			return $this->fetch( $request );
 
 		}
 
 		public function add_domain() {
-
+			// POST /domains
 		}
 
 		public function edit_domain() {
-
+			// PUT /domains/{domainid}
 		}
 
 		public function delete_domain() {
-
+			// DELETE /domains/{domainid}
 		}
 
 		public function verify_spf_record() {
-
+			// POST /domains/{domainid}/verifyspf
 		}
 
 		public function rotate_dkim_keys() {
-
+			// POST /domains/{domainid}/rotatedkim
 		}
 
 		/* SENDER SIGNATURES */
 
+		/**
+		 * list_sender_signatures function.
+		 *
+		 * @access public
+		 * @return void
+		 */
 		public function list_sender_signatures() {
+
+			$request = $this->base_uri . '/senders';
+			return $this->fetch( $request );
 
 		}
 
-		public function get_sender_signatures_details() {
+		/**
+		 * get_sender_signatures_details function.
+		 *
+		 * @access public
+		 * @param mixed $signature_id
+		 * @return void
+		 */
+		public function get_sender_signatures_details( $signature_id ) {
+
+			$request = $this->base_uri . '/senders/'. $signature_id;
+			return $this->fetch( $request );
 
 		}
 
 		public function create_signature() {
-
+			// POST /senders
 		}
 
 		public function edit_signature() {
-
+			// PUT /senders/{signatureid}
 		}
 
 		public function delete_signature() {
-
+			// DELETE /senders/{signatureid}
 		}
 
 		public function resend_confirmation() {
-
+			// POST /senders/{signatureid}/resend
 		}
 
-		public function verify_sender_sig_spf_record() {
-
-		}
 
 		/* STATS. */
 
-		public function get_outbound_stats( $tag, $fromdate, $todate ) {
-
+		public function get_outbound_stats( $tag, $from_date, $to_date ) {
+			$request = $this->base_uri . '/stats/outbound';
+			return $this->fetch( $request );
 		}
 
 		public function get_send_counts() {
-
+			$request = $this->base_uri . '/stats/outbound/sends';
+			return $this->fetch( $request );
 		}
 
 		public function get_bounce_counts() {
-
+			$request = $this->base_uri . '/stats/outbound/bounce';
+			return $this->fetch( $request );
 		}
 
 		public function get_spam_complaints() {
-
+			$request = $this->base_uri . '/stats/outbound/spam';
+			return $this->fetch( $request );
 		}
 
 		public function get_tracked_email_counts() {
-
+			$request = $this->base_uri . '/stats/outbound/tracked';
+			return $this->fetch( $request );
 		}
 
 		public function get_email_open_counts() {
-
+			$request = $this->base_uri . '/stats/outbound/opens';
+			return $this->fetch( $request );
 		}
 
 		public function get_email_platform_usage() {
-
+			$request = $this->base_uri . '/stats/outbound/opens/platforms';
+			return $this->fetch( $request );
 		}
 
 		public function get_email_client_usage() {
-
+			$request = $this->base_uri . '/stats/outbound/opens/emailclients';
+			return $this->fetch( $request );
 		}
 
 		public function get_email_read_times() {
-
+			$request = $this->base_uri . '/stats/outbound/opens/readtimes';
+			return $this->fetch( $request );
 		}
 
 		public function get_click_counts() {
-
+			$request = $this->base_uri . '/stats/outbound/clicks';
+			return $this->fetch( $request );
 		}
 
 		public function get_browser_usage() {
-
+			$request = $this->base_uri . '/stats/outbound/clicks/browserfamilies';
+			return $this->fetch( $request );
 		}
 
 		public function get_browser_platform_usage() {
-
+			$request = $this->base_uri . '/stats/outbound/clicks/platforms';
+			return $this->fetch( $request );
 		}
 
 		public function get_click_location() {
-
+			$request = $this->base_uri . '/stats/outbound/clicks/location';
+			return $this->fetch( $request );
 		}
 
 		/* TRIGGERS. */
