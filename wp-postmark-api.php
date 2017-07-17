@@ -36,7 +36,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 */
 		protected $base_uri = 'https://api.postmarkapp.com';
 
-
 		/**
 		 * SpamCheck URL
 		 * Docs: http://spamcheck.postmarkapp.com/doc
@@ -48,7 +47,24 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 */
 		protected $spamcheck_uri = 'http://spamcheck.postmarkapp.com';
 
+		/**
+		 * blackhole_email
+		 *
+		 * (default value: 'test@blackhole.postmarkapp.com')
+		 *
+		 * @var string
+		 * @access protected
+		 */
+		protected $blackhole_email = 'test@blackhole.postmarkapp.com';
 
+		/**
+		 * __construct function.
+		 *
+		 * @access public
+		 * @param mixed $account_token
+		 * @param mixed $server_token
+		 * @return void
+		 */
 		public function __construct( $account_token, $server_token ) {
 
 
