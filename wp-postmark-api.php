@@ -46,6 +46,17 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access protected
 		 */
 		protected $spamcheck_uri = 'http://spamcheck.postmarkapp.com';
+		
+		/**
+		 * Dmark Base URI
+		 * Docs: https://dmarc.postmarkapp.com/api/
+		 *
+		 * (default value: 'https://dmarc.postmarkapp.com/api/')
+		 *
+		 * @var string
+		 * @access protected
+		 */
+		protected $dmark_uri = 'https://dmarc.postmarkapp.com/api/';
 
 		/**
 		 * blackhole_email
