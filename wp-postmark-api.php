@@ -930,6 +930,129 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				case 516:
 					$msg = __( 'Name format is invalid', 'wp-postmark-api' );
 				break;
+				case 520:
+					$msg = __( 'You are missing a required field to create a Sender Signature.', 'wp-postmark-api' );
+				break;
+				case 521:
+					$msg = __( 'A field in the Sender Signature request is too long.', 'wp-postmark-api' );
+				break;
+				case 522:
+					$msg = __( 'Value for field is invalid.', 'wp-postmark-api' );
+				break;
+				case 600:
+					$msg = __( 'Server query exception', 'wp-postmark-api' );
+				break;
+				case 601:
+					$msg = __( 'Server does not exist', 'wp-postmark-api' );
+				break;
+				case 602:
+					$msg = __( 'Duplicate Inbound Domain', 'wp-postmark-api' );
+				break;
+				case 603:
+					$msg = __( 'Server name already exists', 'wp-postmark-api' );
+				break;
+				case 604:
+					$msg = __( 'You don’t have delete access', 'wp-postmark-api' );
+				break;
+				case 605:
+					$msg = __( 'Unable to delete Server', 'wp-postmark-api' );
+				break;
+				case 606:
+					$msg = __( 'Invalid webhook URL', 'wp-postmark-api' );
+				break;
+				case 607:
+					$msg = __( 'Invalid Server color', 'wp-postmark-api' );
+				break;
+				case 608:
+					$msg = __( 'Server name missing or invalid', 'wp-postmark-api' );
+				break;
+				case 609:
+					$msg = __( 'No updated Server data received', 'wp-postmark-api' );
+				break;
+				case 610:
+					$msg = __( 'Invalid MX record for Inbound Domain', 'wp-postmark-api' );
+				break;
+				case 611:
+					$msg = __( 'InboundSpamThreshold value is invalid. Please use a number between 0 and 30 in incrememts of 5.', 'wp-postmark-api' );
+				break;
+				case 700:
+					$msg = __( 'Messages query exception: You provided invalid querystring parameters in your request. Refer to the Messages (http://developer.postmarkapp.com/developer-api-messages.html) API reference for a list of accepted querystring parameters.', 'wp-postmark-api' );
+				break;
+				case 701:
+					$msg = __( 'Message doesn’t exist', 'wp-postmark-api' );
+				break;
+				case 702:
+					$msg = __( 'Could not bypass this blocked inbound message, please contact support.', 'wp-postmark-api' );
+				break;
+				case 703:
+					$msg = __( 'Could not retry this failed inbound message, please contact support.', 'wp-postmark-api' );
+				break;
+				case 800:
+					$msg = __( 'Trigger query exception', 'wp-postmark-api' );
+				break;
+				case 801:
+					$msg = __( 'Trigger for this tag doesn’t exist', 'wp-postmark-api' );
+				break;
+				case 803:
+					$msg = __( ' Tag with this name already has trigger associated with it', 'wp-postmark-api' );
+				break;
+				case 808:
+					$msg = __( 'Name to match is missing', 'wp-postmark-api' );
+				break;
+				case 809:
+					$msg = __( 'No trigger data received', 'wp-postmark-api' );
+				break;
+				case 810:
+					$msg = __( 'This inbound rule already exists.', 'wp-postmark-api' );
+				break;
+				case 811:
+					$msg = __( 'Unable to remove this inbound rule, please contact support.', 'wp-postmark-api' );
+				break;
+				case 812:
+					$msg = __( 'This inbound rule was not found.', 'wp-postmark-api' );
+				break;
+				case 813:
+					$msg = __( 'Not a valid email address or domain.', 'wp-postmark-api' );
+				break;
+				case 900:
+					$msg = __( 'Stats query exception', 'wp-postmark-api' );
+				break;
+				case 1000:
+					$msg = __( 'Bounces query exception', 'wp-postmark-api' );
+				break;
+				case 1001:
+					$msg = __( 'Bounce was not found.', 'wp-postmark-api' );
+				break;
+				case 1002:
+					$msg = __( ' BounceID parameter required.', 'wp-postmark-api' );
+				break;
+				case 1003:
+					$msg = __( 'Cannot activate bounce.', 'wp-postmark-api' );
+				break;
+				case 1100:
+					$msg = __( 'Template query exception', 'wp-postmark-api' );
+				break;
+				case 1101:
+					$msg = __( 'TemplateId not found.', 'wp-postmark-api' );
+				break;
+				case 1105:
+					$msg = __( 'Template limit would be exceeded.', 'wp-postmark-api' );
+				break;
+				case 1109:
+					$msg = __( 'No Template data received.', 'wp-postmark-api' );
+				break;
+				case 1120:
+					$msg = __( 'A required Template field is missing.', 'wp-postmark-api' );
+				break;
+				case 1121:
+					$msg = __( 'Template field is too large.', 'wp-postmark-api' );
+				break;
+				case 1122:
+					$msg = __( 'A Templated field has been submitted that is invalid.', 'wp-postmark-api' );
+				break;
+				case 1123:
+					$msg = __( 'A field was included in the request body that is not allowed.', 'wp-postmark-api' );
+				break;
 			}
 			return $msg;
 		}
