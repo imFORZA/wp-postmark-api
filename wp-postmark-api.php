@@ -46,7 +46,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access protected
 		 */
 		protected $spamcheck_uri = 'http://spamcheck.postmarkapp.com';
-		
+
 		/**
 		 * Dmark Base URI
 		 * Docs: https://dmarc.postmarkapp.com/api/
@@ -804,6 +804,136 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* WEBHOOKS. */
 
 		/* SPAMCHECK (http://spamcheck.postmarkapp.com/doc) */
+
+
+		/**
+		 * HTTP response code messages.
+		 *
+		 * @param  [String] $code : Response code to get message from.
+		 * @return [String]       : Message corresponding to response code sent in.
+		 */
+		public function response_code_msg( $code = '' ) {
+			switch ( $code ) {
+				case 200:
+					$msg = __( 'Success.', 'wp-postmark-api' );
+				break;
+				case 401:
+					$msg = __( 'Unauthorized: Missing or incorrect API token in header.', 'wp-postmark-api' );
+				break;
+				case 422:
+					$msg = __( 'Unprocessable Entity: Something with the message isn’t quite right, this could be malformed JSON or incorrect fields.', 'wp-postmark-api' );
+				break;
+				case 500:
+					$msg = __( 'Internal Server Error: This is an issue with Postmark’s servers processing your request. In most cases the message is lost during the process, and we are notified so that we can investigate the issue.', 'wp-postmark-api' );
+				break;
+				case 503:
+					$msg = __( 'Service Unavailable: During planned service outages, Postmark API services will return this HTTP response and associated JSON body.', 'wp-postmark-api' );
+				break;
+				}
+			return $msg;
+		}
+
+
+		/**
+		 * api_code_msg function.
+		 *
+		 * @access public
+		 * @param string $code (default: '')
+		 * @return void
+		 */
+		public function api_code_msg( $code = '' ) {
+			switch ( $code ) {
+				case 10:
+					$msg = __( 'Bad or missing API token.', 'wp-postmark-api' );
+				break;
+				case 100:
+					$msg = __( 'Maintenance', 'wp-postmark-api' );
+				break;
+				case 300:
+					$msg = __( ' Invalid email request', 'wp-postmark-api' );
+				break;
+				case 400:
+					$msg = __( 'Sender Signature not found', 'wp-postmark-api' );
+				break;
+				case 401:
+					$msg = __( 'Sender signature not confirmed', 'wp-postmark-api' );
+				break;
+				case 402:
+					$msg = __( 'Invalid JSON', 'wp-postmark-api' );
+				break;
+				case 403:
+					$msg = __( 'Incompatible JSON', 'wp-postmark-api' );
+				break;
+				case 405:
+					$msg = __( 'Not allowed to send', 'wp-postmark-api' );
+				break;
+				case 406:
+					$msg = __( 'Inactive recipient', 'wp-postmark-api' );
+				break;
+				case 409:
+					$msg = __( 'JSON required', 'wp-postmark-api' );
+				break;
+				case 410:
+					$msg = __( 'Too many batch messages', 'wp-postmark-api' );
+				break;
+				case 411:
+					$msg = __( 'Forbidden attachment type', 'wp-postmark-api' );
+				break;
+				case 412:
+					$msg = __( 'Account is Pending', 'wp-postmark-api' );
+				break;
+				case 413:
+					$msg = __( 'Account May Not Send', 'wp-postmark-api' );
+				break;
+				case 500:
+					$msg = __( 'Sender signature query exception', 'wp-postmark-api' );
+				break;
+				case 501:
+					$msg = __( 'Sender Signature not found by id', 'wp-postmark-api' );
+				break;
+				case 502:
+					$msg = __( 'No updated Sender Signature data received', 'wp-postmark-api' );
+				break;
+				case 503:
+					$msg = __( 'You cannot use a public domain', 'wp-postmark-api' );
+				break;
+				case 504:
+					$msg = __( 'Sender Signature already exists', 'wp-postmark-api' );
+				break;
+				case 505:
+					$msg = __( 'DKIM already scheduled for renewal', 'wp-postmark-api' );
+				break;
+				case 506:
+					$msg = __( 'This Sender Signature already confirmed', 'wp-postmark-api' );
+				break;
+				case 507:
+					$msg = __( 'You do not own this Sender Signature', 'wp-postmark-api' );
+				break;
+				case 510:
+					$msg = __( 'This domain was not found', 'wp-postmark-api' );
+				break;
+				case 511:
+					$msg = __( 'Invalid fields supplied', 'wp-postmark-api' );
+				break;
+				case 512:
+					$msg = __( 'Domain already exists', 'wp-postmark-api' );
+				break;
+				case 513:
+					$msg = __( 'You do not own this Domain', 'wp-postmark-api' );
+				break;
+				case 514:
+					$msg = __( 'Name is a required field to create a Domain', 'wp-postmark-api' );
+				break;
+				case 515:
+					$msg = __( 'Name field must be less than or equal to 255 characters', 'wp-postmark-api' );
+				break;
+				case 516:
+					$msg = __( 'Name format is invalid', 'wp-postmark-api' );
+				break;
+			}
+			return $msg;
+		}
+
 
 
 	}
