@@ -46,7 +46,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access protected
 		 */
 		protected $spamcheck_uri = 'http://spamcheck.postmarkapp.com';
-		
+
 		/**
 		 * Dmark Base URI
 		 * Docs: https://dmarc.postmarkapp.com/api/
@@ -83,7 +83,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'Accept' => 'application/json',
 				'Content-Type' => 'application/json',
 				'X-Postmark-Account-Token' => $account_token,
-				'X-Postmark-Server-Token' => $server_token
+				//'X-Postmark-Server-Token' => $server_token
 			);
 		}
 
@@ -98,12 +98,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 			$response = wp_remote_request( $request, $this->args );
 
-			var_dump($response);
-
 			$code = wp_remote_retrieve_response_code($response );
 			if ( 200 !== $code ) {
 				return new WP_Error( 'response-error', sprintf( __( 'Server response code: %d', 'wp-postmark-api' ), $code ) );
 			}
+
 			$body = wp_remote_retrieve_body( $response );
 			return json_decode( $body );
 		}
@@ -383,8 +382,28 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		}
 
-		public function add_server( $name, $color, $raw_email_enabled, $smtp_api_activated, $inbound_hook_url, $bounce_hook_url, $open_hook_url, $post_first_open_only, $track_opens, $track_links, $inbound_domain, $inbound_spam_threshold ) {
-			// POST /servers
+		public function add_server( $args ) {
+
+			$this->args['method'] = 'POST';
+			$this->args['body'] = wp_json_encode( wp_parse_args( $args, array(
+				'name' => '',
+				'Color'=>'Green',
+				'SmtpApiActivated' => true,
+				'RawEmailEnabled' => true,
+				'DeliveryHookUrl' => '',
+				'InboundHookUrl' => '',
+				'BounceHookUrl' => '',
+				'IncludeBounceContentInHook' => '',
+				'OpenHookUrl' => '',
+				'PostFirstOpenOnly' => true,
+				'TrackOpens' => true,
+				'TrackLinks' => 'HtmlAndText',
+				'InboundDomain' => '',
+				'InboundSpamThreshold' => '15'
+			)));
+
+			$request = $this->base_uri . '/servers';
+			return $this->fetch( $request );
 		}
 
 		public function edit_server() {
