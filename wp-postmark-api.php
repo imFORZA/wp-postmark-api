@@ -15,7 +15,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 	/**
 	 * PostMarkAPI class.
 	 */
-	class PostMarkAPI {
+	class PostMarkAPI extends PostMarkBase {
 
 		/**
 		 * BaseAPI Endpoint
