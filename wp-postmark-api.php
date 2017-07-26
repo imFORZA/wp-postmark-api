@@ -750,8 +750,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			// POST /triggers/tags
 		}
 
-		public function get_single_trigger() {
-			// GET /triggers/tags/{triggerid}
+		public function get_single_trigger( $trigger_id ) {
+
+			$request = $this->base_uri . '/triggers/tags/' . $trigger_id;
+			return $this->fetch( $request );
 		}
 
 		public function edit_single_trigger() {
