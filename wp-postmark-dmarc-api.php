@@ -2,31 +2,20 @@
 /**
  * WP Postmark API (http://developer.postmarkapp.com/)
  *
- * @package WP-API-Libraries\WP-Postmark-Base\WP-Postmark-API
+ * @package WP-API-Libraries\WP-Postmark-Base\WP-Postmark-Dmarc-API
  */
-
-/*
-* Plugin Name: WP Postmark API
-* Plugin URI: https://github.com/wp-api-libraries/wp-postmark-api
-* Description: Perform API requests to Postmark in WordPress.
-* Author: WP API Libraries
-* Version: 1.0.0
-* Author URI: https://wp-api-libraries.com
-* GitHub Plugin URI: https://github.com/wp-api-libraries/wp-postmark-api
-* GitHub Branch: master
-*/
 
 /* Exit if accessed directly. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /* Check if class exists. */
-if ( ! class_exists( 'PostMarkAPI' ) ) {
+if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 
 
 	/**
 	 * PostMarkAPI class.
 	 */
-	class PostMarkAPI {
+	class PostMarkDmarcAPI {
 
 		/**
 		 * BaseAPI Endpoint
