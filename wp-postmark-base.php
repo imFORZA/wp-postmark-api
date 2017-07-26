@@ -74,8 +74,17 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			return $body;
 		}
 
+		private function build_request(){
 
+		}
 
+		public function set_account_token( $token ){
+
+		}
+
+		public function set_server_token( $token ){
+
+		}
 		/**
 		 * HTTP response code messages.
 		 *
