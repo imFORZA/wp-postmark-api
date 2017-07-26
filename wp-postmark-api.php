@@ -99,12 +99,13 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			$response = wp_remote_request( $request, $this->args );
 
 			$code = wp_remote_retrieve_response_code($response );
+			$body = json_decode( wp_remote_retrieve_body( $response ));
+
 			if ( 200 !== $code ) {
-				return new WP_Error( 'response-error', sprintf( __( 'Server response code: %d', 'wp-postmark-api' ), $code ) );
+				return new WP_Error( 'response-error', sprintf( __( 'Status: %d', 'wp-postmark-api' ), $code ), $body );
 			}
 
-			$body = wp_remote_retrieve_body( $response );
-			return json_decode( $body );
+			return $body;
 		}
 
 		/* EMAIL. */
