@@ -227,133 +227,133 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'Type' => 'HardBounce',
 					'Code' => 1,
 					'Name' => 'Hard bounce',
-					'Description' => 'The server was unable to deliver your message (ex: unknown user, mailbox not found).'
+					'Description' => __('The server was unable to deliver your message (ex: unknown user, mailbox not found).', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'Transient',
 					'Code' => 2,
 					'Name' => 'Message delayed',
-					'Description' => 'The server could not temporarily deliver your message (ex: Message is delayed due to network troubles).'
+					'Description' => __('The server could not temporarily deliver your message (ex: Message is delayed due to network troubles).', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'Unsubscribe',
 					'Code' => 16,
 					'Name' => 'Unsubscribe request',
-					'Description' => 'Unsubscribe or Remove request.'
+					'Description' => __('Unsubscribe or Remove request.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'Subscribe',
 					'Code' => 32,
 					'Name' => 'Subscribe request',
-					'Description' => 'Subscribe request from someone wanting to get added to the mailing list.'
+					'Description' => __('Subscribe request from someone wanting to get added to the mailing list.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'AutoResponder',
 					'Code' => 64,
 					'Name' => 'Auto responder',
-					'Description' => 'Automatic email responder (ex: "Out of Office" or "On Vacation").'
+					'Description' => __('Automatic email responder (ex: "Out of Office" or "On Vacation").', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'AddressChange',
 					'Code' => 128,
 					'Name' => 'Address change',
-					'Description' => 'The recipient has requested an address change.'
+					'Description' => __('The recipient has requested an address change.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'DnsError',
 					'Code' => 256,
 					'Name' => 'DNS error',
-					'Description' => 'A temporary DNS error.'
+					'Description' => __('A temporary DNS error.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'SpamNotification',
 					'Code' => 512,
 					'Name' => 'Spam notification',
-					'Description' => 'The message was delivered, but was either blocked by the user, or classified as spam, bulk mail, or had rejected content.'
+					'Description' => __('The message was delivered, but was either blocked by the user, or classified as spam, bulk mail, or had rejected content.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'OpenRelayTest',
 					'Code' => 1024,
 					'Name' => 'Open relay test',
-					'Description' => 'The NDR is actually a test email message to see if the mail server is an open relay.'
+					'Description' => __('The NDR is actually a test email message to see if the mail server is an open relay.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'Unknown',
 					'Code' => 2048,
 					'Name' => 'Unknown',
-					'Description' => 'Unable to classify the NDR.'
+					'Description' => __('Unable to classify the NDR.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'SoftBounce',
 					'Code' => 4096,
 					'Name' => 'Soft bounce',
-					'Description' => 'Unable to temporarily deliver message (i.e. mailbox full, account disabled, exceeds quota, out of disk space).'
+					'Description' => __('Unable to temporarily deliver message (i.e. mailbox full, account disabled, exceeds quota, out of disk space).', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'VirusNotification',
 					'Code' => 8192,
 					'Name' => 'Virus notification',
-					'Description' => 'The bounce is actually a virus notification warning about a virus/code infected message.'
+					'Description' => __('The bounce is actually a virus notification warning about a virus/code infected message.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'ChallengeVerification',
 					'Code' => 16384,
 					'Name' => 'Spam challenge verification',
-					'Description' => 'The bounce is a challenge asking for verification you actually sent the email. Typcial challenges are made by Spam Arrest, or MailFrontier Matador.'
+					'Description' => __('The bounce is a challenge asking for verification you actually sent the email. Typcial challenges are made by Spam Arrest, or MailFrontier Matador.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'BadEmailAddress',
 					'Code' => 100000,
 					'Name' => 'Invalid email address',
-					'Description' => 'The address is not a valid email address.'
+					'Description' => '__(The address is not a valid email address.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'SpamComplaint',
 					'Code' => 100001,
 					'Name' => 'Spam complaint',
-					'Description' => 'The subscriber explicitly marked this message as spam.'
+					'Description' => __('The subscriber explicitly marked this message as spam.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'ManuallyDeactivated',
 					'Code' => 100002,
 					'Name' => 'Manually deactivated',
-					'Description' => 'The email was manually deactivated.'
+					'Description' => __('The email was manually deactivated.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'Unconfirmed',
 					'Code' => 100003,
 					'Name' => 'Registration not confirmed',
-					'Description' => 'The subscriber has not clicked on the confirmation link upon registration or import.'
+					'Description' => __('The subscriber has not clicked on the confirmation link upon registration or import.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'Blocked',
 					'Code' => 100006,
 					'Name' => 'ISP block',
-					'Description' => 'Blocked from this ISP due to content or blacklisting.'
+					'Description' => __('Blocked from this ISP due to content or blacklisting.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'SMTPApiError',
 					'Code' => 100007,
 					'Name' => 'SMTP API error',
-					'Description' => 'An error occurred while accepting an email through the SMTP API.'
+					'Description' => __('An error occurred while accepting an email through the SMTP API.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'InboundError',
 					'Code' => 100008,
 					'Name' => 'Processing failed',
-					'Description' => 'Unable to deliver inbound message to destination inbound hook.'
+					'Description' => __('Unable to deliver inbound message to destination inbound hook.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'DMARCPolicy',
 					'Code' => 100009,
 					'Name' => 'DMARC Policy',
-					'Description' => 'Email rejected due DMARC Policy.'
+					'Description' => __('Email rejected due DMARC Policy.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'TemplateRenderingFailed',
 					'Code' => 100010,
 					'Name' => 'Template rendering failed',
-					'Description' => 'An error occurred while attempting to render your template.'
+					'Description' => __('An error occurred while attempting to render your template.', 'wp-postmark-api')
 				),
 
 			);
