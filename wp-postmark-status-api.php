@@ -28,7 +28,7 @@ if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
 		 * @var string
 		 * @access protected
 		 */
-		protected $spamcheck_uri = 'https://status.postmarkapp.com/api/1.0';
+		protected $status_uri = 'https://status.postmarkapp.com/api/1.0';
 
 
 		public function get_status() {
