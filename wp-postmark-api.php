@@ -896,6 +896,13 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/domains/' . $domain_id );
 		}
 
+		/**
+		 * delete_domain function.
+		 *
+		 * @access public
+		 * @param mixed $domain_id
+		 * @return void
+		 */
 		public function delete_domain( $domain_id ) {
 
 			$args = array(
@@ -905,6 +912,13 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/domains/' . $domain_id );
 		}
 
+		/**
+		 * verify_domain_spf_record function.
+		 *
+		 * @access public
+		 * @param mixed $domain_id
+		 * @return void
+		 */
 		public function verify_domain_spf_record( $domain_id ) {
 		  $args = array(
 				'method' => 'POST'
@@ -913,6 +927,13 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/domains/' . $domain_id . '/verifyspf' );
 		}
 
+		/**
+		 * rotate_dkim_keys function.
+		 *
+		 * @access public
+		 * @param mixed $domain_id
+		 * @return void
+		 */
 		public function rotate_dkim_keys( $domain_id ) {
 			$args = array(
 				'method' => 'POST',
@@ -1278,6 +1299,15 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* TRIGGERS. */
 
+
+		/**
+		 * create_trigger_for_tag function.
+		 *
+		 * @access public
+		 * @param mixed $name
+		 * @param bool $track_opens (default: true)
+		 * @return void
+		 */
 		public function create_trigger_for_tag( $name, $track_opens = true ) {
 			$args = array(
 				'method' => 'POST',
@@ -1290,10 +1320,26 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/triggers/tags' );
 		}
 
+		/**
+		 * get_single_trigger function.
+		 *
+		 * @access public
+		 * @param mixed $trigger_id
+		 * @return void
+		 */
 		public function get_single_trigger( $trigger_id ) {
 			return $this->build_request()->fetch( '/triggers/tags/' . $trigger_id );
 		}
 
+		/**
+		 * edit_single_trigger function.
+		 *
+		 * @access public
+		 * @param mixed $trigger_id
+		 * @param mixed $name
+		 * @param string $track_opens (default: '')
+		 * @return void
+		 */
 		public function edit_single_trigger( $trigger_id, $name, $track_opens = '' ) {
 			$args = array(
 				'method' => 'PUT',
@@ -1309,6 +1355,13 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/triggers/tags/' . $trigger_id );
 		}
 
+		/**
+		 * delete_single_trigger function.
+		 *
+		 * @access public
+		 * @param mixed $trigger_id
+		 * @return void
+		 */
 		public function delete_single_trigger( $trigger_id ) {
 			$args = array(
 				'method' => 'DELETE',
@@ -1332,6 +1385,14 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* Inbound Rules Triggers */
 
+
+		/**
+		 * create_trigger_for_inbound_rule function.
+		 *
+		 * @access public
+		 * @param mixed $rule
+		 * @return void
+		 */
 		public function create_trigger_for_inbound_rule( $rule ) {
 			$args = array(
 				'method' => 'POST',
@@ -1342,6 +1403,13 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/triggers/inboundrules' );
 		}
 
+		/**
+		 * delete_single_inbound_trigger function.
+		 *
+		 * @access public
+		 * @param mixed $trigger_id
+		 * @return void
+		 */
 		public function delete_single_inbound_trigger( $trigger_id ) {
 			$args = array(
 				'method' => 'DELETE',
