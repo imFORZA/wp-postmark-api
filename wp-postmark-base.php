@@ -36,6 +36,19 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		protected $blackhole_email = 'test@blackhole.postmarkapp.com';
 
 		/**
+		 * Arguments to be used by fetch.
+		 */
+		private $args;
+
+		/**
+		 * Argum
+		 * @var [type]
+		 */
+		private $default_args = array(
+			'method' => 'GET'
+		);
+
+		/**
 		 * __construct function.
 		 *
 		 * @access public
@@ -43,14 +56,22 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 * @param mixed $server_token
 		 * @return void
 		 */
-		public function __construct( $account_token, $server_token ) {
+		public function __construct( $account_token, $server_token = '', $debug = false ) {
 
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
 				'Content-Type' => 'application/json',
-				'X-Postmark-Account-Token' => $account_token,
-				// 'X-Postmark-Server-Token' => $server_token
 			);
+
+			if( $server_token == '' ){
+				$this->args['headers']['X-Postmark-Account-Token'] = $account_token;
+			}else{
+				$this->args['headers']['X-Postmark-Server-Token'] = $server_token;
+			}
+
+			if( $debug ){
+				$this->debug = true;
+			}
 		}
 
 		/**
@@ -60,12 +81,19 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 * @param mixed $request Request URL.
 		 * @return $body Body.
 		 */
-		private function fetch( $request ) {
+		protected function fetch( $route ) {
 
-			$response = wp_remote_request( $request, $this->args );
+			$response = wp_remote_request( $this->base_uri . $route, $this->args );
+
+			// error_log(print_r( $response, true ));
+			if( $this->debug ){
+				return $response;
+			}
 
 			$code = wp_remote_retrieve_response_code( $response );
 			$body = json_decode( wp_remote_retrieve_body( $response ) );
+
+
 
 			if ( 200 !== $code ) {
 				return new WP_Error( 'response-error', sprintf( __( 'Status: %d', 'wp-postmark-api' ), $code ), $body );
@@ -74,16 +102,38 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			return $body;
 		}
 
-		private function build_request(){
+		protected function build_request( $args = array() ){
 
+			// Resetting arguments based on defaults (if the defaults have them set).
+			$this->args = wp_parse_args( $this->default_args, $this->args );
+
+			// Setting arguments based passsed array.
+			$this->args = wp_parse_args( $args, $this->args );
+
+			if( $this->debug ){ // Prevents spam emails during debug mode.
+				if( isset( $this->args['body'] ) && isset( $this->args['body']['To'] ) ){
+					$this->args['body']['To'] = $this->blackhole_email;
+				}
+			}
+
+			if( isset( $args['body'] ) && gettype( $args['body'] ) !== 'string' ){
+
+				$this->args['body'] = wp_json_encode( $this->args['body'] );
+			}
+
+			// error_log( print_r( $this->args, true ));
+
+			return $this;
 		}
 
-		public function set_account_token( $token ){
-
+		public function set_account_token( $token ){ // I think this is how it's supposed to work?
+			$this->args['headers']['X-Postmark-Account-Token'] = $token;
+			unset( $this->args['headers']['X-Postmark-Server-Token'] );
 		}
 
-		public function set_server_token( $token ){
-
+		public function set_server_token( $token ){ // Not 100% sure tbh.
+			$this->args['headers']['X-Postmark-Server-Token'] = $token;
+			unset( $this->args['headers']['X-Postmark-Account-Token'] );
 		}
 		/**
 		 * HTTP response code messages.
