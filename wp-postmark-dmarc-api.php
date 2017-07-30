@@ -26,38 +26,39 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 * @var string
 		 * @access protected
 		 */
-		protected $dmark_uri = 'https://dmarc.postmarkapp.com/api/';
+		protected $dmark_uri = 'https://dmarc.postmarkapp.com/';
 
 
-				/**
+		/*
 		 * HTTP response code messages.
+		 * Commented out until it's different from base class.
 		 *
 		 * @param  [String] $code : Response code to get message from.
 		 * @return [String]       : Message corresponding to response code sent in.
 		 */
-		public function response_code_msg( $code = '' ) {
-			switch ( $code ) {
-				case 200:
-					$msg = __( 'OK.', 'wp-postmark-api' );
-				break;
-				case 204:
-					$msg = __( 'No Content.', 'wp-postmark-api' );
-				break;
-				case 303:
-					$msg = __( 'See Other. Your request is being redirected to a different URI.', 'wp-postmark-api' );
-				break;
-				case 400:
-					$msg = __( 'Bad Request.', 'wp-postmark-api' );
-				break;
-				case 422:
-					$msg = __( 'Unprocessable Entity', 'wp-postmark-api' );
-				break;
-				case 500:
-					$msg = __( 'Internal Server Error', 'wp-postmark-api' );
-				break;
-			}
-			return $msg;
-		}
+		// public function response_code_msg( $code = '' ) {
+		// 	switch ( $code ) {
+		// 		case 200:
+		// 			$msg = __( 'OK.', 'wp-postmark-api' );
+		// 		break;
+		// 		case 204:
+		// 			$msg = __( 'No Content.', 'wp-postmark-api' );
+		// 		break;
+		// 		case 303:
+		// 			$msg = __( 'See Other. Your request is being redirected to a different URI.', 'wp-postmark-api' );
+		// 		break;
+		// 		case 400:
+		// 			$msg = __( 'Bad Request.', 'wp-postmark-api' );
+		// 		break;
+		// 		case 422:
+		// 			$msg = __( 'Unprocessable Entity', 'wp-postmark-api' );
+		// 		break;
+		// 		case 500:
+		// 			$msg = __( 'Internal Server Error', 'wp-postmark-api' );
+		// 		break;
+		// 	}
+		// 	return $msg;
+		// }
 
 
 
@@ -70,7 +71,15 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 * @return void
 		 */
 		public function create_record( $email, $domain ) {
+			$args = array(
+				'method' => 'POST',
+				'body' => array(
+					'email' => $email,
+					'domain' => $domain,
+				),
+			);
 
+			return $this->build_request( $args )->fetch( '/records/' );
 		}
 
 		public function get_record() {
