@@ -101,7 +101,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'body' => $emails,
 			);
 
-			return $this->build_request( $args )->fetch( '/email/batch' );;
+			return $this->build_request( $args )->fetch( '/email/batch' );
 
 		}
 
