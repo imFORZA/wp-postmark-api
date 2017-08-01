@@ -1131,7 +1131,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_email_client_usage( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = $this->base_uri . '/stats/outbound/opens/emailclients';
+			$request = $this->route_uri . '/stats/outbound/opens/emailclients';
 			$request = '/stats/outbound/opens/emailclients?' . http_build_query( array_filter( array(
 				'tag' => $tag,
 				'fromdate' => $from_date,

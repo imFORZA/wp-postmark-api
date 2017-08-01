@@ -28,10 +28,16 @@ if ( ! class_exists( 'PostMarkSpamcheckAPI' ) ) {
 		 * @var string
 		 * @access protected
 		 */
-		protected $spamcheck_uri = 'http://spamcheck.postmarkapp.com';
+		protected $route_uri = 'http://spamcheck.postmarkapp.com';
 
 		// Overriding constructor since is an entirely public library.
 		public function __construct( $debug = false){
+
+			$this->args['headers'] = array(
+				'Accept' => 'application/json',
+				'Content-Type' => 'application/json',
+			);
+
 			$this->debug = $debug;
 		}
 
@@ -44,6 +50,7 @@ if ( ! class_exists( 'PostMarkSpamcheckAPI' ) ) {
 		 * @return void
 		 */
 		public function spamcheck( $email, $options = 'short' ) {
+
 			$args = array(
 				'method' => 'POST',
 				'body' => array(

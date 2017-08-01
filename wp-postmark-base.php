@@ -38,7 +38,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		/**
 		 * Arguments to be used by fetch.
 		 */
-		private $args;
+		protected $args;
 
 		/**
 		 * Argum
@@ -83,7 +83,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 */
 		protected function fetch( $route ) {
 
-			$response = wp_remote_request( $this->base_uri . $route, $this->args );
+			$response = wp_remote_request( $this->route_uri . $route, $this->args );
 			if( $this->debug ){
 				return $response;
 			}

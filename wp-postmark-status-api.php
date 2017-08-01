@@ -20,6 +20,11 @@ if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
 
 
 		public function __construct( $debug = false){
+			$this->args['headers'] = array(
+				'Accept' => 'application/json',
+				'Content-Type' => 'application/json',
+			);
+
 			$this->debug = $debug;
 		}
 
@@ -32,7 +37,7 @@ if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
 		 * @var string
 		 * @access protected
 		 */
-		protected $base_uri = 'https://status.postmarkapp.com/api/1.0';
+		protected $route_uri = 'https://status.postmarkapp.com/api/1.0';
 
 		/**
 		 * Get current system status. Status can be UP MAINTENANCE DELAY DEGRADED DOWN.
