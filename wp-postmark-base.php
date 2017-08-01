@@ -120,19 +120,32 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			return $this;
 		}
 
+		/**
+		 * Set account token.
+		 * Unsets server API token.
+		 *
+		 * @param string $token Account token.
+		 */
 		public function set_account_token( $token ){ // I think this is how it's supposed to work?
 			$this->args['headers']['X-Postmark-Account-Token'] = $token;
 			unset( $this->args['headers']['X-Postmark-Server-Token'] );
 		}
 
+		/**
+		 * Set server token.
+		 * Unsets account API token.
+		 *
+		 * @param string $token Server API token.
+		 */
 		public function set_server_token( $token ){ // Not 100% sure tbh.
 			$this->args['headers']['X-Postmark-Server-Token'] = $token;
 			unset( $this->args['headers']['X-Postmark-Account-Token'] );
 		}
+
 		/**
 		 * HTTP response code messages.
 		 *
-		 * @param  [String] $code : Response code to get message from.
+		 * @param  int $code 			: Response code to get message from.
 		 * @return [String]       : Message corresponding to response code sent in.
 		 */
 		public function response_code_msg( $code = '' ) {
@@ -158,11 +171,12 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 
 
 		/**
-		 * api_code_msg function.
+		 * Function to get API response messages function.
 		 *
 		 * @access public
-		 * @param string $code (default: '')
-		 * @return void
+		 *
+		 * @param  int $code 			: Response code to get message from.
+		 * @return [String]       : Message corresponding to response code sent in.
 		 */
 		public function api_code_msg( $code = '' ) {
 			switch ( $code ) {

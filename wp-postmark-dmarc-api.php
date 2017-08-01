@@ -27,48 +27,14 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 * @var string
 		 * @access protected
 		 */
-		protected $dmark_uri = 'https://dmarc.postmarkapp.com/';
-
-
-		/*
-		 * HTTP response code messages.
-		 * Commented out until it's different from base class.
-		 *
-		 * @param  [String] $code : Response code to get message from.
-		 * @return [String]       : Message corresponding to response code sent in.
-		 */
-		// public function response_code_msg( $code = '' ) {
-		// 	switch ( $code ) {
-		// 		case 200:
-		// 			$msg = __( 'OK.', 'wp-postmark-api' );
-		// 		break;
-		// 		case 204:
-		// 			$msg = __( 'No Content.', 'wp-postmark-api' );
-		// 		break;
-		// 		case 303:
-		// 			$msg = __( 'See Other. Your request is being redirected to a different URI.', 'wp-postmark-api' );
-		// 		break;
-		// 		case 400:
-		// 			$msg = __( 'Bad Request.', 'wp-postmark-api' );
-		// 		break;
-		// 		case 422:
-		// 			$msg = __( 'Unprocessable Entity', 'wp-postmark-api' );
-		// 		break;
-		// 		case 500:
-		// 			$msg = __( 'Internal Server Error', 'wp-postmark-api' );
-		// 		break;
-		// 	}
-		// 	return $msg;
-		// }
-
-
+		protected $route_uri = 'https://dmarc.postmarkapp.com/';
 
 		/**
-		 * create_record function.
+		 * Create a record.
 		 *
 		 * @access public
-		 * @param mixed $email
-		 * @param mixed $domain
+		 * @param string $email
+		 * @param string $domain
 		 * @return void
 		 */
 		public function create_record( $email, $domain ) {
@@ -83,14 +49,26 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/records/' );
 		}
 
+		/**
+		 * Get records associated with given account key.
+		 * @return [type] [description]
+		 */
 		public function get_record() {
 			return $this->build_request()->fetch( '/records/my/' );
 		}
 
+		/**
+		 * Get DNS snippets for this account.
+		 * @return [type] [description]
+		 */
 		public function get_dns_snippet() {
 			return $this->build_request()->fetch( '/records/my/dns/' );
 		}
 
+		/**
+		 * Verify DNS records.
+		 * @return [type] [description]
+		 */
 		public function verify_dns() {
 			$args = array(
 				'method' => 'POST',
@@ -99,6 +77,10 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/records/my/verify/' );
 		}
 
+		/**
+		 * Delete my records.
+		 * @return [type] [description]
+		 */
 		public function delete_record() {
 			$args = array(
 				'method' => 'DELETE',
@@ -107,6 +89,14 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/records/my/' );
 		}
 
+		/**
+		 * List dmarc reports (with optional parameters to specify search).
+		 * @param  string $from_date [description]
+		 * @param  string $to_date   [description]
+		 * @param  string $limit     [description]
+		 * @param  string $after     [description]
+		 * @return [type]            [description]
+		 */
 		public function list_dmarc_reports( $from_date = '', $to_date = '', $limit = '', $after = '' ) {
 
 			$request = '';

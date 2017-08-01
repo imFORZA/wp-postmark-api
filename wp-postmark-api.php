@@ -354,7 +354,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param  mixed  $offset (Default: 0) Offset from first entry in order.
 		 * @return Object Server response.
 		 */
-		public function get_templates( $count, $offset = 0 ) {
+		public function get_templates( $count = 50, $offset = 0 ) {
 				return $this->build_request()->fetch( '/templates?count=' . $count . '&offset=' . $offset );
 		}
 
@@ -365,7 +365,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param  mixed  $offset (Default: 0) Offset from first entry in order.
 		 * @return [type]          [description]
 		 */
-		public function list_templates( $count, $offset = 0 ){
+		public function list_templates( $count = 50, $offset = 0 ){
 			return $this->get_templates( $count, $offset );
 		}
 
@@ -663,7 +663,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param  mixed  $name 	(Default: null) name of server (search filter).
 		 * @return Object Server response.
 		 */
-		public function list_servers( $count, $offset = 0, $name = null ) {
+		public function list_servers( $count = 50, $offset = 0, $name = null ) {
 			return $this->build_request()->fetch( '/servers?count=' . $count . '&offset=' . $offset . '&name=' . $name );
 		}
 
