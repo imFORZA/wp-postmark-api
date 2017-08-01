@@ -20,3 +20,4 @@ include_once( 'wp-postmark-base.php' );
 include_once( 'wp-postmark-api.php' );
 include_once( 'wp-postmark-dmarc-api.php' );
 include_once( 'wp-postmark-spamcheck-api.php' );
+include_once( 'wp-postmark-status-api.php' );

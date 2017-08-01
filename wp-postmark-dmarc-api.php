@@ -20,8 +20,9 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		/**
 		 * Dmark Base URI
 		 * Docs: https://dmarc.postmarkapp.com/api/
+		 * Route: https://dmarc.postmarkapp.com/
 		 *
-		 * (default value: 'https://dmarc.postmarkapp.com/api/')
+		 * (default value: 'https://dmarc.postmarkapp.com/')
 		 *
 		 * @var string
 		 * @access protected
@@ -83,35 +84,71 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		}
 
 		public function get_record() {
-
+			return $this->build_request()->fetch( '/records/my/' );
 		}
 
 		public function get_dns_snippet() {
-
+			return $this->build_request()->fetch( '/records/my/dns/' );
 		}
 
 		public function verify_dns() {
+			$args = array(
+				'method' => 'POST',
+			);
 
+			return $this->build_request( $args )->fetch( '/records/my/verify/' );
 		}
 
 		public function delete_record() {
+			$args = array(
+				'method' => 'DELETE',
+			);
 
+			return $this->build_request( $args )->fetch( '/records/my/' );
 		}
 
-		public function list_dmarc_reprots( $from_date = '', $to_date = '', $limit = '', $after = '' ) {
+		public function list_dmarc_reports( $from_date = '', $to_date = '', $limit = '', $after = '' ) {
 
+			$request = '';
+			if(	$from_date === '' &&	$to_date === '' &&	$limit === '' &&	$after === '' ) {
+				$request = '/records/my/reports';
+			}else{
+				$args = array(
+					'from_date' => $from_date,
+					'to_date' => $to_date,
+					'limit' => $limit,
+					'after' => $after,
+				);
+
+				$request = '/records/my/reports?' . http_build_query( array_filter( $args ) );
+			}
+
+			return $request;
 		}
 
 		public function get_dmarc_report( $dmarc_report_id ) {
-
+			return $this->build_request()->fetch( '/records/my/reports/' . $dmarc_report_id );
 		}
 
+		// initiate recovery email to email provided at owner. Will return true if email was sent (aka if email is registered to something). Public route.
 		public function recover_api_token( $owner ) {
-			// tokens/recover
+			$args = array(
+				'method' => 'POST',
+				'body' => array(
+					'owner' => $owner,
+				),
+			);
+
+			return $this->build_request( $args )->fetch( '/tokens/recover/' );
 		}
 
+		// generate a new api token and replcae your existing one with it.
 		public function rotate_api_token() {
-			// /records/my/token/rotate
+			$args = array(
+				'method' => 'POST',
+			);
+
+			return $this->build_request( $args )->fetch( '/records/my/token/rotate/' );
 		}
 
 	}

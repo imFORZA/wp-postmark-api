@@ -23,7 +23,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 * @var string
 		 * @access protected
 		 */
-		protected $base_uri = 'https://api.postmarkapp.com';
+		protected $route_uri = 'https://api.postmarkapp.com';
 
 		/**
 		 * blackhole_email
@@ -84,16 +84,12 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		protected function fetch( $route ) {
 
 			$response = wp_remote_request( $this->base_uri . $route, $this->args );
-
-			// error_log(print_r( $response, true ));
 			if( $this->debug ){
 				return $response;
 			}
 
 			$code = wp_remote_retrieve_response_code( $response );
 			$body = json_decode( wp_remote_retrieve_body( $response ) );
-
-
 
 			if ( 200 !== $code ) {
 				return new WP_Error( 'response-error', sprintf( __( 'Status: %d', 'wp-postmark-api' ), $code ), $body );
@@ -120,8 +116,6 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 
 				$this->args['body'] = wp_json_encode( $this->args['body'] );
 			}
-
-			// error_log( print_r( $this->args, true ));
 
 			return $this;
 		}

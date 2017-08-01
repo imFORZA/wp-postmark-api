@@ -123,7 +123,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Get Bounces. Used as a paginator for viewing bounce data.
 		 *
 		 * @access public
-		 * @param mixed  $count Count.
+		 * @param mixed  $count (Default: 50) Count.
 		 * @param mixed  $offset Offset (default: 0) Offset.
 		 * @param string $type (default: '') Type.
 		 * @param string $inactive (default: '') Inactive.
@@ -134,36 +134,21 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param string $to_date (default: '') To Date.
 		 * @return Object Server response.
 		 */
-		public function get_bounces( $count, $offset = 0, $type = '', $inactive = '', $email_filter = '', $tag = '', $message_id = '', $from_date = '', $to_date = '' ) {
+		public function get_bounces( $count = 50, $offset = 0, $type = '', $inactive = '', $email_filter = '', $tag = '', $message_id = '', $from_date = '', $to_date = '' ) {
 
 			$args = array(
 				'count' => $count,
 				'offset' => $offset,
+				'type' => $type,
+				'inactive' => $inactive,
+				'email_filter' => $email_filter,
+				'tag' => $tag,
+				'message_id' => $message_id,
+				'from_date' => $from_date,
+				'to_date' => $to_date,
 			);
 
-			if( $type != '' ){
-				$args['type'] = $type;
-			}
-			if( $inactive != '' ){
-				$args['inactive'] = $inactive;
-			}
-			if( $email_filter != '' ){
-				$args['email_filter'] = $email_filter;
-			}
-			if( $tag != '' ){
-				$args['tag'] = $tag;
-			}
-			if( $message_id != '' ){
-				$args['message_id'] = $message_id;
-			}
-			if( $from_date != '' ){
-				$args['from_date'] = $from_date;
-			}
-			if( $to_date != '' ){
-				$args['to_date'] = $to_date;
-			}
-
-			$request = '/bounces?' . http_build_query( $args );
+			$request = '/bounces?' . http_build_query( array_filter( $args ) );
 
 			return $this->build_request()->fetch( $request );
 
@@ -305,7 +290,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'Type' => 'BadEmailAddress',
 					'Code' => 100000,
 					'Name' => 'Invalid email address',
-					'Description' => '__(The address is not a valid email address.', 'wp-postmark-api')
+					'Description' => __('The address is not a valid email address.', 'wp-postmark-api')
 				),
 				array(
 					'Type' => 'SpamComplaint',
@@ -719,24 +704,19 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param mixed $city
 		 * @return Object Server response.
 		 */
-		public function search_outbound_messages( $count, $offset = 0, $recipient = '', $fromemail = '', $tag = '', $status = '', $todate = '', $fromdate = '' ) {
+		public function search_outbound_messages( $count = 50, $offset = 0, $recipient = '', $fromemail = '', $tag = '', $status = '', $todate = '', $fromdate = '' ) {
 
 			$request = '/messages/outbound?count=' . $count . '&';
 
-			$request .= http_build_query(array(
+			$request .= http_build_query(array_filter(array(
 				'offset' => $offset,
 				'recipient' => $recipient,
 				'fromemail' => $fromemail,
 				'tag' => $tag,
-				'status' => $status
-			));
-
-			if( $todate != '' ){
-				$request .= '&todate=' . $todate;
-			}
-			if( $fromdate != '' ){
-				$request .= '&fromdate=' . $fromdate;
-			}
+				'status' => $status,
+				'todate' => $todate,
+				'fromdate' => $fromdate,
+			)));
 
 			return $this->build_request()->fetch( $request );
 		}
@@ -773,10 +753,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param  string   $fromdate    fromdate
 		 * @return [type]               [description]
 		 */
-		public function search_inbound_messages( $count, $offset = 0, $recipient = '', $fromemail = '', $tag = '', $subject = '', $mailboxhash = '', $status = '', $todate = '', $fromdate = '' ){
+		public function search_inbound_messages( $count = 50, $offset = 0, $recipient = '', $fromemail = '', $tag = '', $subject = '', $mailboxhash = '', $status = '', $todate = '', $fromdate = '' ){
 			$request = '/messages/inbound?count=' . $count . '&';
 
-			$request .= http_build_query(array(
+			$request .= http_build_query(array_filter(array(
 				'offset' => $offset,
 				'recipient' => $recipient,
 				'fromemail' => $fromemail,
@@ -784,14 +764,9 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'subject' => $subject,
 				'mailboxhash' => $mailboxhash,
 				'status' => $status,
-			));
-
-			if( $todate != '' ){
-				$request .= '&todate=' . $todate;
-			}
-			if( $fromdate != '' ){
-				$request .= '&fromdate=' . $fromdate;
-			}
+				'todate' => $todate,
+				'fromdate' => $fromdate,
+			)));
 
 			return $this->build_request()->fetch( $request );
 		}
@@ -817,11 +792,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 *
 		 * @access public
 		 * @param mixed $message_id
-		 * @param mixed  $count  Number of results from offset to display.
+		 * @param mixed  $count  (Default: 50) Number of results from offset to display.
 		 * @param mixed  $offset (Default: 0) Offset from first entry in order.
 		 * @return Object Server response.
 		 */
-		public function get_message_opens( $count, $offset = 0 ) {
+		public function get_message_opens( $count = 50, $offset = 0 ) {
 
 			$request = '/messages/outbound/opens/?' . http_build_query(array(
 				'count' => $count,
@@ -1020,14 +995,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_outbound_stats( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound?' . http_build_query( array_filter(array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1042,13 +1014,13 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_send_counts( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/sends?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
+			$request = '/stats/outbound/sends';
+			if( $tag !== '' || $from_date !== '' ||	$to_date !== '' ){
+				$request .= '?' . http_build_query( array_filter( array(
+					'tag' => $tag,
+					'fromdate' => $from_date,
+					'todate' => $todate,
+				)));
 			}
 
 			return $this->build_request( $args )->fetch( $request );
@@ -1064,14 +1036,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_bounce_counts( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/bounce?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/bounce?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1086,14 +1055,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_spam_complaints( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/spam?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/spam?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1108,14 +1074,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_tracked_email_counts( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/tracked?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/tracked?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1130,14 +1093,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_email_open_counts( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/opens?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/opens?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1152,14 +1112,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_email_platform_usage( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/opens/platforms?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/opens/platforms?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1175,14 +1132,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 */
 		public function get_email_client_usage( $tag = '', $from_date = '', $to_date = '' ) {
 			$request = $this->base_uri . '/stats/outbound/opens/emailclients';
-			$request = '/stats/outbound/opens/emailclients?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/opens/emailclients?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1197,14 +1151,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_email_read_times( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/opens/readtimes?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/opens/readtimes?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1219,14 +1170,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_click_counts( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/clicks?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/clicks?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1241,14 +1189,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_browser_usage( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/clicks/browserfamilies?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/clicks/browserfamilies?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1263,14 +1208,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_browser_platform_usage( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/clicks/platforms?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/clicks/platforms?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}
@@ -1285,14 +1227,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function get_click_location( $tag = '', $from_date = '', $to_date = '' ) {
-			$request = '/stats/outbound/clicks/location?' . http_build_query( array('tag' => $tag ) );
-
-			if( $from_date != '' ){
-				$request .= '&fromdate=' . $from_date;
-			}
-			if( $to_date != '' ){
-				$request .= '&todate=' . $to_date;
-			}
+			$request = '/stats/outbound/clicks/location?' . http_build_query( array_filter( array(
+				'tag' => $tag,
+				'fromdate' => $from_date,
+				'todate' => $to_date,
+			)));
 
 			return $this->build_request( $args )->fetch( $request );
 		}

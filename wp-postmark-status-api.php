@@ -19,6 +19,10 @@ if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
 	class PostMarkStatusAPI extends PostMarkBase{
 
 
+		public function __construct( $debug = false){
+			$this->debug = $debug;
+		}
+
 		/**
 		 * Status URL
 		 * Docs: https://status.postmarkapp.com/api/
@@ -28,35 +32,43 @@ if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
 		 * @var string
 		 * @access protected
 		 */
-		protected $status_uri = 'https://status.postmarkapp.com/api/1.0';
+		protected $base_uri = 'https://status.postmarkapp.com/api/1.0';
 
-
+		/**
+		 * Get current system status. Status can be UP MAINTENANCE DELAY DEGRADED DOWN.
+		 */
 		public function get_status() {
-			// /status
+			return $this->build_request()->fetch( '/status/' );
 		}
 
+		/**
+		 * Get last recorded incident.
+		 */
 		public function get_last_incident() {
-
+			return $this->build_request()->fetch( '/last_incident/' );
 		}
 
+		/**
+		 * Get list of all current and past incidents.
+		 */
 		public function list_incidents() {
-
+			return $this->build_request()->fetch( '/list_incidents/' );
 		}
 
 		public function get_incident( $incident_id ) {
-
+			return $this->build_request()->fetch( '/incidents/' . $incident_id );
 		}
 
 		public function get_services_status() {
-			// /services
+			return $this->build_request()->fetch( '/services/' );
 		}
 
 		public function get_services_availability() {
-			// /services/availability
+			return $this->build_request()->fetch( '/status/availability' );
 		}
 
 		public function get_delivery_stats() {
-			// /delivery
+			return $this->build_request()->fetch( '/delivery/' );
 		}
 	}
 

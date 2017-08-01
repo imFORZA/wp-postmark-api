@@ -30,6 +30,10 @@ if ( ! class_exists( 'PostMarkSpamcheckAPI' ) ) {
 		 */
 		protected $spamcheck_uri = 'http://spamcheck.postmarkapp.com';
 
+		// Overriding constructor since is an entirely public library.
+		public function __construct( $debug = false){
+			$this->debug = $debug;
+		}
 
 		/**
 		 * spamcheck function.
@@ -39,10 +43,16 @@ if ( ! class_exists( 'PostMarkSpamcheckAPI' ) ) {
 		 * @param mixed $options Must either be "long" for a full report of processing rules, or "short" for a score request.
 		 * @return void
 		 */
-		public function spamcheck( $email, $options ) {
+		public function spamcheck( $email, $options = 'short' ) {
+			$args = array(
+				'method' => 'POST',
+				'body' => array(
+					'email' => $email,
+					'options' => $options,
+				)
+			);
 
-			// http://spamcheck.postmarkapp.com/filter
-
+			return $this->build_request( $args )->fetch( '/filter/' );
 		}
 
 	}
