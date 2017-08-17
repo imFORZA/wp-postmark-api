@@ -48,6 +48,8 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			'method' => 'GET'
 		);
 
+	  private $debug;
+
 		/**
 		 * __construct function.
 		 *
@@ -56,7 +58,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 * @param mixed $server_token
 		 * @return void
 		 */
-		public function __construct( $account_token, $server_token = '', $debug = false ) {
+		public function __construct( $account_token, $server_token = '', bool $debug = false ) {
 
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
@@ -69,9 +71,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 				$this->args['headers']['X-Postmark-Server-Token'] = $server_token;
 			}
 
-			if( $debug ){
-				$this->debug = true;
-			}
+			$this->debug = $debug;
 		}
 
 		/**
