@@ -38,15 +38,11 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		/**
 		 * Arguments to be used by fetch.
 		 */
-		protected $args;
+		protected $args = array();
 
-		/**
-		 * Argum
-		 * @var [type]
-		 */
-		private $default_args = array(
-			'method' => 'GET'
-		);
+		protected $account_token;
+
+		protected $server_token;
 
 	  private $debug;
 
@@ -59,18 +55,8 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 * @return void
 		 */
 		public function __construct( $account_token, $server_token = '', bool $debug = false ) {
-
-			$this->args['headers'] = array(
-				'Accept' => 'application/json',
-				'Content-Type' => 'application/json',
-			);
-
-			if( $server_token == '' ){
-				$this->args['headers']['X-Postmark-Account-Token'] = $account_token;
-			}else{
-				$this->args['headers']['X-Postmark-Server-Token'] = $server_token;
-			}
-
+			$this->account_token = $account_token;
+			$this->server_token = $server_token;
 			$this->debug = $debug;
 		}
 
@@ -84,12 +70,15 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		protected function fetch( $route ) {
 
 			$response = wp_remote_request( $this->route_uri . $route, $this->args );
+
 			if( $this->debug ){
 				return $response;
 			}
 
 			$code = wp_remote_retrieve_response_code( $response );
 			$body = json_decode( wp_remote_retrieve_body( $response ) );
+
+			$this->clear();
 
 			if ( 200 !== $code ) {
 				return new WP_Error( 'response-error', sprintf( __( 'Status: %d', 'wp-postmark-api' ), $code ), $body );
@@ -99,9 +88,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		}
 
 		protected function build_request( $args = array() ){
-
-			// Resetting arguments based on defaults (if the defaults have them set).
-			$this->args = wp_parse_args( $this->default_args, $this->args );
+			$this->set_headers();
 
 			// Setting arguments based passsed array.
 			$this->args = wp_parse_args( $args, $this->args );
@@ -118,6 +105,26 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			}
 
 			return $this;
+		}
+
+		/**
+		 * Clear query data.
+		 */
+		protected function clear() {
+			$this->args = array();
+		}
+
+		protected function set_headers(){
+			$this->args['headers'] = array(
+				'Accept' => 'application/json',
+				'Content-Type' => 'application/json',
+			);
+
+			if( $this->server_token == '' ){
+				$this->args['headers']['X-Postmark-Account-Token'] = $this->account_token;
+			}else{
+				$this->args['headers']['X-Postmark-Server-Token'] = $this->server_token;
+			}
 		}
 
 		/**
