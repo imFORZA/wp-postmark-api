@@ -925,8 +925,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access public
 		 * @return Object Server response.
 		 */
-		public function list_sender_signatures() {
-			return $this->build_request()->fetch( '/senders' );
+		public function list_sender_signatures( $count = 500, $offset = 0 ) {
+			return $this->build_request()->fetch( "/senders?count=$count&offset=$offset" );
 		}
 
 		/**
