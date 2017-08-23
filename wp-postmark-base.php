@@ -81,7 +81,6 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			$this->clear();
 
 			if ( 200 !== $code ) {
-				_error_log( $body );
 				return new WP_Error( 'response-error', sprintf( __( 'Status: %d', 'wp-postmark-api' ), $code ), $body );
 			}
 
