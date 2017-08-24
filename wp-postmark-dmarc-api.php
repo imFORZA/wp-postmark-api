@@ -29,6 +29,21 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 */
 		protected $route_uri = 'https://dmarc.postmarkapp.com/';
 
+		public function __construct( string $account_token = null ){
+			$this->account_token = $account_token;
+		}
+
+		public function set_headers(){
+			$this->args['headers'] = array(
+				'Accept' => 'application/json',
+				'Content-Type' => 'application/json',
+			);
+
+			if( !empty ( $this->account_token ) ){
+				$this->args['headers']['X-Api-Token'] = $this->account_token;
+			}
+		}
+
 		/**
 		 * Create a record.
 		 *
