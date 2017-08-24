@@ -27,7 +27,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 * @var string
 		 * @access protected
 		 */
-		protected $route_uri = 'https://dmarc.postmarkapp.com/';
+		protected $route_uri = 'https://dmarc.postmarkapp.com';
 
 		public function __construct( string $account_token = null ){
 			$this->account_token = $account_token;
@@ -61,7 +61,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 				),
 			);
 
-			return $this->build_request( $args )->fetch( '/records/' );
+			return $this->build_request( $args )->fetch( '/records' );
 		}
 
 		/**
@@ -69,7 +69,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 * @return [type] [description]
 		 */
 		public function get_record() {
-			return $this->build_request()->fetch( '/records/my/' );
+			return $this->build_request()->fetch( '/records/my' );
 		}
 
 		/**
@@ -77,7 +77,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 * @return [type] [description]
 		 */
 		public function get_dns_snippet() {
-			return $this->build_request()->fetch( '/records/my/dns/' );
+			return $this->build_request()->fetch( '/records/my/dns' );
 		}
 
 		/**
@@ -89,7 +89,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 				'method' => 'POST',
 			);
 
-			return $this->build_request( $args )->fetch( '/records/my/verify/' );
+			return $this->build_request( $args )->fetch( '/records/my/verify' );
 		}
 
 		/**
@@ -101,7 +101,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 				'method' => 'DELETE',
 			);
 
-			return $this->build_request( $args )->fetch( '/records/my/' );
+			return $this->build_request( $args )->fetch( '/records/my' );
 		}
 
 		/**
@@ -132,7 +132,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		}
 
 		public function get_dmarc_report( $dmarc_report_id ) {
-			return $this->build_request()->fetch( '/records/my/reports/' . $dmarc_report_id );
+			return $this->build_request()->fetch( '/records/my/reports' . $dmarc_report_id );
 		}
 
 		// initiate recovery email to email provided at owner. Will return true if email was sent (aka if email is registered to something). Public route.
@@ -144,7 +144,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 				),
 			);
 
-			return $this->build_request( $args )->fetch( '/tokens/recover/' );
+			return $this->build_request( $args )->fetch( '/tokens/recover' );
 		}
 
 		// generate a new api token and replcae your existing one with it.
@@ -153,7 +153,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 				'method' => 'POST',
 			);
 
-			return $this->build_request( $args )->fetch( '/records/my/token/rotate/' );
+			return $this->build_request( $args )->fetch( '/records/my/token/rotate' );
 		}
 
 	}

@@ -80,7 +80,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 
 			$this->clear();
 
-			if ( 200 !== $code ) {
+			if ( ! $this->is_status_ok( $code ) ) {
 				return new WP_Error( 'response-error', sprintf( __( 'Status: %d', 'wp-postmark-api' ), $code ), $body );
 			}
 
@@ -125,6 +125,16 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			}else{
 				$this->args['headers']['X-Postmark-Server-Token'] = $this->server_token;
 			}
+		}
+
+		/**
+		 * Check if HTTP status code is a success.
+		 *
+		 * @param  int $code HTTP status code.
+		 * @return boolean       True if status is within valid range.
+		 */
+		protected function is_status_ok( $code ) {
+			return ( 200 <= $code && 300 > $code );
 		}
 
 		/**
