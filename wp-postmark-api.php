@@ -1001,7 +1001,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1023,7 +1023,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				)));
 			}
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1042,7 +1042,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1061,7 +1061,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1080,7 +1080,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1099,7 +1099,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1118,7 +1118,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1138,7 +1138,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1157,7 +1157,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1176,7 +1176,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1195,7 +1195,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1214,7 +1214,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/**
@@ -1233,7 +1233,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'todate' => $to_date,
 			)));
 
-			return $this->build_request( $args )->fetch( $request );
+			return $this->build_request()->fetch( $request );
 		}
 
 		/* TRIGGERS. */
@@ -1319,7 +1319,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function search_triggers( $count = 50, $offset = 0, $match_name = '') {
-			return $this->build_request( $args )->fetch( '/triggers/tags?match_name=' . $match_name . '&count=' . $count . '&offset=' . $offset );
+			return $this->build_request()->fetch( '/triggers/tags?match_name=' . $match_name . '&count=' . $count . '&offset=' . $offset );
 		}
 
 		/* Inbound Rules Triggers */
