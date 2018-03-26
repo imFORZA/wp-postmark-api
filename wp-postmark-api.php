@@ -11,6 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /* Check if class exists. */
 if ( ! class_exists( 'PostMarkAPI' ) ) {
 
+	if ( ! class_exists( 'PostMarkBase' ) ) {
+		include_once('wp-postmark-base.php');
+	}
+
 	/**
 	 * PostMarkAPI class.
 	 */
