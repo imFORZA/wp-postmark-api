@@ -520,6 +520,26 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/email/withTemplate/' );
 		}
 
+		/**
+		 * Send batch with templates
+		 *
+		 * @link https://postmarkapp.com/developer/api/templates-api#send-batch-with-templates
+		 *
+		 * @param  array $messages An array of messages to send, each being an email
+		 *                         following the structure from previous emails.
+		 * @return object          The response, an array of responses per message.
+		 */
+		public function send_batch_email_with_templates( $messages ){
+			$args = array(
+				'method' => 'POST',
+				'body'   => array(
+					'messages' => $messages
+				)
+			);
+
+			return $this->build_request( $args )->fetch( '/email/batchWithTemplates' );
+		}
+
 		/* SERVERS. */
 
 		/**
