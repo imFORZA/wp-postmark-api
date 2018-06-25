@@ -732,15 +732,19 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 			$request = '/messages/outbound?count=' . $count . '&';
 
-			$request .= http_build_query(array_filter(array(
-				'offset' => $offset,
+			$args = array(
+				'offset'    => $offset,
 				'recipient' => $recipient,
 				'fromemail' => $fromemail,
-				'tag' => $tag,
-				'status' => $status,
-				'todate' => $todate,
-				'fromdate' => $fromdate,
-			)));
+				'tag'       => $tag,
+				'status'    => $status,
+				'todate'    => $todate,
+				'fromdate'  => $fromdate,
+			);
+
+			$request .= http_build_query(array_filter($args, function($val, $key = null){
+				return $val !== '';
+			}, ARRAY_FILTER_USE_BOTH));
 
 			return $this->build_request()->fetch( $request );
 		}
