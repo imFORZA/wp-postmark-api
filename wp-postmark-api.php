@@ -728,11 +728,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param mixed $city
 		 * @return Object Server response.
 		 */
-		public function search_outbound_messages( $count = 50, $offset = 0, $recipient = '', $fromemail = '', $tag = '', $status = '', $todate = '', $fromdate = '' ) {
+		public function search_outbound_messages( $count = 50, $offset = 0, $recipient = null, $fromemail = null, $tag = null, $status = null, $todate = null, $fromdate = null ) {
 
 			$request = '/messages/outbound?count=' . $count . '&';
 
-			$args = array(
+			$request .= http_build_query(array(
 				'offset'    => $offset,
 				'recipient' => $recipient,
 				'fromemail' => $fromemail,
@@ -740,11 +740,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'status'    => $status,
 				'todate'    => $todate,
 				'fromdate'  => $fromdate,
-			);
-
-			$request .= http_build_query(array_filter($args, function($val, $key = null){
-				return $val !== '';
-			}, ARRAY_FILTER_USE_BOTH));
+			));
 
 			return $this->build_request()->fetch( $request );
 		}
