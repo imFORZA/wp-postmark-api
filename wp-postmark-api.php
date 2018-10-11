@@ -20,6 +20,24 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 	 */
 	class PostMarkAPI extends PostMarkBase {
 
+		/**
+		 * TODO: filter the emails more.
+		 *
+		 * @param  [type] $emails [description]
+		 * @return [type]         [description]
+		 */
+		public static function format_email_fields( $emails ){
+			if( is_array( $emails ) ){
+				return implode( ',', $emails );
+			}
+
+			return $emails;
+		}
+
+		public static function fef( $emails ){
+			return self::format_email_fields( $emails );
+		}
+
 		/* EMAIL. */
 
 		/**
@@ -44,26 +62,26 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		public function send_email( $from, $to, $cc, $bcc, $subject, $tag, $html_body, $text_body, $reply_to = '', $headers = array(), $track_opens = true, $track_links = 'HtmlAndText', $attachments = array() ) {
 
 			$args = array(
-					'method' => 'POST',
-					'timeout' => 45,
-					'redirection' => 5,
-					'httpversion' => '1.0',
-					'blocking' => true,
-					'body' => array(
-						'From' => $from,
-						'To' => $to,
-						'Cc' => $cc,
-						'Bcc' => $bcc,
-						'Subject' => $subject,
-						'Tag' => $tag,
-						'HtmlBody' => $html_body,
-						'TextBody' => $text_body,
-						'ReplyTo' => $reply_to,
-						'Headers' => $headers,
-						'TrackOpens' => $track_opens,
-						'TrackLinks' => $track_links,
-						'Attachments' => $attachments,
-						),
+				'method' => 'POST',
+				'timeout' => 45,
+				'redirection' => 5,
+				'httpversion' => '1.0',
+				'blocking' => true,
+				'body' => array(
+					'From'        => $from,
+					'To'          => $to,
+					'Cc'          => $cc,
+					'Bcc'         => $bcc,
+					'Subject'     => $subject,
+					'Tag'         => $tag,
+					'HtmlBody'    => $html_body,
+					'TextBody'    => $text_body,
+					'ReplyTo'     => $reply_to,
+					'Headers'     => $headers,
+					'TrackOpens'  => $track_opens,
+					'TrackLinks'  => $track_links,
+					'Attachments' => $attachments,
+				),
 			);
 
 			$response = $this->build_request( $args )->fetch( '/email' );
@@ -498,18 +516,18 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			$args = array(
 				'method' => 'POST',
 				'body'	 => array(
-					'TemplateId' => $template_id,
+					'TemplateId'    => $template_id,
 					'TemplateModel' => $template_model,
-					'InlineCss' => $inlinecss,
-					'From' => $from,
-					'To' => $to,
-					'Cc' => $cc,
-					'Bcc' => $bcc,
-					'Tag' => $tag,
-					'Headers' => $headers,
-					'TrackOpens' => $trackopens,
-					'TrackLinks' => $tracklinks,
-					'Attachments' => $attachments,
+					'InlineCss'     => $inlinecss,
+					'From'          => $from,
+					'To'            => self::fef( $to ),
+					'Cc'            => self::fef( $cc ),
+					'Bcc'           => self::fef( $bcc ),
+					'Tag'           => $tag,
+					'Headers'       => $headers,
+					'TrackOpens'    => $trackopens,
+					'TrackLinks'    => $tracklinks,
+					'Attachments'   => $attachments,
 				)
 			);
 
