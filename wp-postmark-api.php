@@ -777,20 +777,20 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param  string   $fromdate    fromdate
 		 * @return [type]               [description]
 		 */
-		public function search_inbound_messages( $count = 50, $offset = 0, $recipient = '', $fromemail = '', $tag = '', $subject = '', $mailboxhash = '', $status = '', $todate = '', $fromdate = '' ){
+		public function search_inbound_messages( $count = 50, $offset = 0, $recipient = null, $fromemail = null, $tag = null, $subject = null, $mailboxhash = null, $status = null, $todate = null, $fromdate = null ){
 			$request = '/messages/inbound?count=' . $count . '&';
 
-			$request .= http_build_query(array_filter(array(
-				'offset' => $offset,
-				'recipient' => $recipient,
-				'fromemail' => $fromemail,
-				'tag' => $tag,
-				'subject' => $subject,
+			$request .= http_build_query(array(
+				'offset'      => $offset,
+				'recipient'   => $recipient,
+				'fromemail'   => $fromemail,
+				'tag'         => $tag,
+				'subject'     => $subject,
 				'mailboxhash' => $mailboxhash,
-				'status' => $status,
-				'todate' => $todate,
-				'fromdate' => $fromdate,
-			)));
+				'status'      => $status,
+				'todate'      => $todate,
+				'fromdate'    => $fromdate,
+			));
 
 			return $this->build_request()->fetch( $request );
 		}
