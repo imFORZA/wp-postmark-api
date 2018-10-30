@@ -5,9 +5,8 @@
  * @package WP-API-Libraries\WP-Postmark-Base\WP-Postmark-Status-API
  */
 
-
-/* Exit if accessed directly. */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+ // Exit if accessed directly.
+ defined( 'ABSPATH' ) || exit;
 
 /* Check if class exists. */
 if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
@@ -16,10 +15,10 @@ if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
 	/**
 	 * PostMarkStatusAPI class.
 	 */
-	class PostMarkStatusAPI extends PostMarkBase{
+	class PostMarkStatusAPI extends PostMarkBase {
 
 
-		public function __construct( $debug = false){
+		public function __construct( $debug = false ) {
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
 				'Content-Type' => 'application/json',

@@ -5,14 +5,14 @@
  * @package WP-API-Libraries\WP-Postmark-Base\WP-Postmark-Dmarc-API
  */
 
-/* Exit if accessed directly. */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+ // Exit if accessed directly.
+ defined( 'ABSPATH' ) || exit;
 
 /* Check if class exists. */
 if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 
 	if ( ! class_exists( 'PostMarkBase' ) ) {
-		include_once('wp-postmark-base.php');
+		include_once( 'wp-postmark-base.php' );
 	}
 
 	/**
@@ -32,17 +32,17 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 */
 		protected $route_uri = 'https://dmarc.postmarkapp.com';
 
-		public function __construct( string $account_token = null ){
+		public function __construct( string $account_token = null ) {
 			$this->account_token = $account_token;
 		}
 
-		public function set_headers(){
+		public function set_headers() {
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
 				'Content-Type' => 'application/json',
 			);
 
-			if( !empty ( $this->account_token ) ){
+			if ( ! empty( $this->account_token ) ) {
 				$this->args['headers']['X-Api-Token'] = $this->account_token;
 			}
 		}
@@ -69,6 +69,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 
 		/**
 		 * Get records associated with given account key.
+		 *
 		 * @return [type] [description]
 		 */
 		public function get_record() {
@@ -77,6 +78,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 
 		/**
 		 * Get DNS snippets for this account.
+		 *
 		 * @return [type] [description]
 		 */
 		public function get_dns_snippet() {
@@ -85,6 +87,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 
 		/**
 		 * Verify DNS records.
+		 *
 		 * @return [type] [description]
 		 */
 		public function verify_dns() {
@@ -97,6 +100,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 
 		/**
 		 * Delete my records.
+		 *
 		 * @return [type] [description]
 		 */
 		public function delete_record() {
@@ -109,6 +113,7 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 
 		/**
 		 * List dmarc reports (with optional parameters to specify search).
+		 *
 		 * @param  string $from_date [description]
 		 * @param  string $to_date   [description]
 		 * @param  string $limit     [description]
@@ -118,9 +123,9 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		public function list_dmarc_reports( $from_date = '', $to_date = '', $limit = '', $after = '' ) {
 
 			$request = '';
-			if(	$from_date === '' &&	$to_date === '' &&	$limit === '' &&	$after === '' ) {
+			if (	$from_date === '' &&	$to_date === '' &&	$limit === '' &&	$after === '' ) {
 				$request = '/records/my/reports';
-			}else{
+			} else {
 				$args = array(
 					'from_date' => $from_date,
 					'to_date' => $to_date,

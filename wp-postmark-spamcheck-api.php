@@ -6,20 +6,20 @@
  */
 
 
-/* Exit if accessed directly. */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+ // Exit if accessed directly.
+ defined( 'ABSPATH' ) || exit;
 
 /* Check if class exists. */
 if ( ! class_exists( 'PostMarkSpamcheckAPI' ) ) {
 
 	if ( ! class_exists( 'PostMarkBase' ) ) {
-		include_once('wp-postmark-base.php');
+		include_once( 'wp-postmark-base.php' );
 	}
 
 	/**
 	 * PostMarkAPI class.
 	 */
-	class PostMarkSpamcheckAPI extends PostMarkBase{
+	class PostMarkSpamcheckAPI extends PostMarkBase {
 
 
 		/**
@@ -34,7 +34,7 @@ if ( ! class_exists( 'PostMarkSpamcheckAPI' ) ) {
 		protected $route_uri = 'http://spamcheck.postmarkapp.com';
 
 		// Overriding constructor since is an entirely public library.
-		public function __construct( $debug = false){
+		public function __construct( $debug = false ) {
 
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
@@ -59,7 +59,7 @@ if ( ! class_exists( 'PostMarkSpamcheckAPI' ) ) {
 				'body' => array(
 					'email' => $email,
 					'options' => $options,
-				)
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/filter/' );

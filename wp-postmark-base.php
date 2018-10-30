@@ -5,8 +5,8 @@
  * @package WP-API-Libraries\WP-Postmark-Base
  */
 
-/* Exit if accessed directly. */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+ // Exit if accessed directly.
+ defined( 'ABSPATH' ) || exit;
 
 /* Check if class exists. */
 if ( ! class_exists( 'PostMarkBase' ) ) {
@@ -44,7 +44,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 
 		protected $server_token;
 
-	  private $debug;
+		private $debug;
 
 		/**
 		 * __construct function.
@@ -71,7 +71,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 
 			$response = wp_remote_request( $this->route_uri . $route, $this->args );
 
-			if( $this->debug ){
+			if ( $this->debug ) {
 				return $response;
 			}
 
@@ -87,19 +87,19 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			return $body;
 		}
 
-		protected function build_request( $args = array() ){
+		protected function build_request( $args = array() ) {
 			$this->set_headers();
 
 			// Setting arguments based passsed array.
 			$this->args = wp_parse_args( $args, $this->args );
 
-			if( $this->debug ){ // Prevents spam emails during debug mode.
-				if( isset( $this->args['body'] ) && isset( $this->args['body']['To'] ) ){
+			if ( $this->debug ) { // Prevents spam emails during debug mode.
+				if ( isset( $this->args['body'] ) && isset( $this->args['body']['To'] ) ) {
 					$this->args['body']['To'] = $this->blackhole_email;
 				}
 			}
 
-			if( isset( $args['body'] ) && gettype( $args['body'] ) !== 'string' ){
+			if ( isset( $args['body'] ) && gettype( $args['body'] ) !== 'string' ) {
 
 				$this->args['body'] = wp_json_encode( $this->args['body'] );
 			}
@@ -114,15 +114,15 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			$this->args = array();
 		}
 
-		protected function set_headers(){
+		protected function set_headers() {
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
 				'Content-Type' => 'application/json',
 			);
 
-			if( $this->server_token == '' ){
+			if ( $this->server_token == '' ) {
 				$this->args['headers']['X-Postmark-Account-Token'] = $this->account_token;
-			}else{
+			} else {
 				$this->args['headers']['X-Postmark-Server-Token'] = $this->server_token;
 			}
 		}
@@ -143,7 +143,8 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 *
 		 * @param string $token Account token.
 		 */
-		public function set_account_token( $token ){ // I think this is how it's supposed to work?
+		public function set_account_token( $token ) {
+			// I think this is how it's supposed to work?
 			$this->args['headers']['X-Postmark-Account-Token'] = $token;
 			unset( $this->args['headers']['X-Postmark-Server-Token'] );
 		}
@@ -154,7 +155,8 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 *
 		 * @param string $token Server API token.
 		 */
-		public function set_server_token( $token ){ // Not 100% sure tbh.
+		public function set_server_token( $token ) {
+			// Not 100% sure tbh.
 			$this->args['headers']['X-Postmark-Server-Token'] = $token;
 			unset( $this->args['headers']['X-Postmark-Account-Token'] );
 		}

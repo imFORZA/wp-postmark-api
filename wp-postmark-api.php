@@ -5,14 +5,14 @@
  * @package WP-API-Libraries\WP-Postmark-Base\WP-Postmark-API
  */
 
-/* Exit if accessed directly. */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+ // Exit if accessed directly.
+ defined( 'ABSPATH' ) || exit;
 
 /* Check if class exists. */
 if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 	if ( ! class_exists( 'PostMarkBase' ) ) {
-		include_once('wp-postmark-base.php');
+		include_once( 'wp-postmark-base.php' );
 	}
 
 	/**
@@ -26,15 +26,15 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param  [type] $emails [description]
 		 * @return [type]         [description]
 		 */
-		public static function format_email_fields( $emails ){
-			if( is_array( $emails ) ){
+		public static function format_email_fields( $emails ) {
+			if ( is_array( $emails ) ) {
 				return implode( ',', $emails );
 			}
 
 			return $emails;
 		}
 
-		public static function fef( $emails ){
+		public static function fef( $emails ) {
 			return self::format_email_fields( $emails );
 		}
 
@@ -228,139 +228,139 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access public
 		 * @return list of bounce types.
 		 */
-		public function get_bounce_types(){
+		public function get_bounce_types() {
 			return array(
 				array(
 					'Type' => 'HardBounce',
 					'Code' => 1,
 					'Name' => 'Hard bounce',
-					'Description' => __('The server was unable to deliver your message (ex: unknown user, mailbox not found).', 'wp-postmark-api')
+					'Description' => __( 'The server was unable to deliver your message (ex: unknown user, mailbox not found).', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'Transient',
 					'Code' => 2,
 					'Name' => 'Message delayed',
-					'Description' => __('The server could not temporarily deliver your message (ex: Message is delayed due to network troubles).', 'wp-postmark-api')
+					'Description' => __( 'The server could not temporarily deliver your message (ex: Message is delayed due to network troubles).', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'Unsubscribe',
 					'Code' => 16,
 					'Name' => 'Unsubscribe request',
-					'Description' => __('Unsubscribe or Remove request.', 'wp-postmark-api')
+					'Description' => __( 'Unsubscribe or Remove request.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'Subscribe',
 					'Code' => 32,
 					'Name' => 'Subscribe request',
-					'Description' => __('Subscribe request from someone wanting to get added to the mailing list.', 'wp-postmark-api')
+					'Description' => __( 'Subscribe request from someone wanting to get added to the mailing list.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'AutoResponder',
 					'Code' => 64,
 					'Name' => 'Auto responder',
-					'Description' => __('Automatic email responder (ex: "Out of Office" or "On Vacation").', 'wp-postmark-api')
+					'Description' => __( 'Automatic email responder (ex: "Out of Office" or "On Vacation").', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'AddressChange',
 					'Code' => 128,
 					'Name' => 'Address change',
-					'Description' => __('The recipient has requested an address change.', 'wp-postmark-api')
+					'Description' => __( 'The recipient has requested an address change.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'DnsError',
 					'Code' => 256,
 					'Name' => 'DNS error',
-					'Description' => __('A temporary DNS error.', 'wp-postmark-api')
+					'Description' => __( 'A temporary DNS error.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'SpamNotification',
 					'Code' => 512,
 					'Name' => 'Spam notification',
-					'Description' => __('The message was delivered, but was either blocked by the user, or classified as spam, bulk mail, or had rejected content.', 'wp-postmark-api')
+					'Description' => __( 'The message was delivered, but was either blocked by the user, or classified as spam, bulk mail, or had rejected content.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'OpenRelayTest',
 					'Code' => 1024,
 					'Name' => 'Open relay test',
-					'Description' => __('The NDR is actually a test email message to see if the mail server is an open relay.', 'wp-postmark-api')
+					'Description' => __( 'The NDR is actually a test email message to see if the mail server is an open relay.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'Unknown',
 					'Code' => 2048,
 					'Name' => 'Unknown',
-					'Description' => __('Unable to classify the NDR.', 'wp-postmark-api')
+					'Description' => __( 'Unable to classify the NDR.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'SoftBounce',
 					'Code' => 4096,
 					'Name' => 'Soft bounce',
-					'Description' => __('Unable to temporarily deliver message (i.e. mailbox full, account disabled, exceeds quota, out of disk space).', 'wp-postmark-api')
+					'Description' => __( 'Unable to temporarily deliver message (i.e. mailbox full, account disabled, exceeds quota, out of disk space).', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'VirusNotification',
 					'Code' => 8192,
 					'Name' => 'Virus notification',
-					'Description' => __('The bounce is actually a virus notification warning about a virus/code infected message.', 'wp-postmark-api')
+					'Description' => __( 'The bounce is actually a virus notification warning about a virus/code infected message.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'ChallengeVerification',
 					'Code' => 16384,
 					'Name' => 'Spam challenge verification',
-					'Description' => __('The bounce is a challenge asking for verification you actually sent the email. Typcial challenges are made by Spam Arrest, or MailFrontier Matador.', 'wp-postmark-api')
+					'Description' => __( 'The bounce is a challenge asking for verification you actually sent the email. Typcial challenges are made by Spam Arrest, or MailFrontier Matador.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'BadEmailAddress',
 					'Code' => 100000,
 					'Name' => 'Invalid email address',
-					'Description' => __('The address is not a valid email address.', 'wp-postmark-api')
+					'Description' => __( 'The address is not a valid email address.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'SpamComplaint',
 					'Code' => 100001,
 					'Name' => 'Spam complaint',
-					'Description' => __('The subscriber explicitly marked this message as spam.', 'wp-postmark-api')
+					'Description' => __( 'The subscriber explicitly marked this message as spam.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'ManuallyDeactivated',
 					'Code' => 100002,
 					'Name' => 'Manually deactivated',
-					'Description' => __('The email was manually deactivated.', 'wp-postmark-api')
+					'Description' => __( 'The email was manually deactivated.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'Unconfirmed',
 					'Code' => 100003,
 					'Name' => 'Registration not confirmed',
-					'Description' => __('The subscriber has not clicked on the confirmation link upon registration or import.', 'wp-postmark-api')
+					'Description' => __( 'The subscriber has not clicked on the confirmation link upon registration or import.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'Blocked',
 					'Code' => 100006,
 					'Name' => 'ISP block',
-					'Description' => __('Blocked from this ISP due to content or blacklisting.', 'wp-postmark-api')
+					'Description' => __( 'Blocked from this ISP due to content or blacklisting.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'SMTPApiError',
 					'Code' => 100007,
 					'Name' => 'SMTP API error',
-					'Description' => __('An error occurred while accepting an email through the SMTP API.', 'wp-postmark-api')
+					'Description' => __( 'An error occurred while accepting an email through the SMTP API.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'InboundError',
 					'Code' => 100008,
 					'Name' => 'Processing failed',
-					'Description' => __('Unable to deliver inbound message to destination inbound hook.', 'wp-postmark-api')
+					'Description' => __( 'Unable to deliver inbound message to destination inbound hook.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'DMARCPolicy',
 					'Code' => 100009,
 					'Name' => 'DMARC Policy',
-					'Description' => __('Email rejected due DMARC Policy.', 'wp-postmark-api')
+					'Description' => __( 'Email rejected due DMARC Policy.', 'wp-postmark-api' ),
 				),
 				array(
 					'Type' => 'TemplateRenderingFailed',
 					'Code' => 100010,
 					'Name' => 'Template rendering failed',
-					'Description' => __('An error occurred while attempting to render your template.', 'wp-postmark-api')
+					'Description' => __( 'An error occurred while attempting to render your template.', 'wp-postmark-api' ),
 				),
 
 			);
@@ -372,8 +372,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Get Templates. AKA List Templates
 		 *
 		 * @access public
-		 * @param  mixed  $count  Number of results from offset to display.
-		 * @param  mixed  $offset (Default: 0) Offset from first entry in order.
+		 * @param  mixed $count  Number of results from offset to display.
+		 * @param  mixed $offset (Default: 0) Offset from first entry in order.
 		 * @return Object Server response.
 		 */
 		public function get_templates( $count = 50, $offset = 0 ) {
@@ -383,11 +383,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/**
 		 * List templates. Redirects to get_templates()
 		 *
-		 * @param  mixed  $count  Number of results from offset to display.
-		 * @param  mixed  $offset (Default: 0) Offset from first entry in order.
+		 * @param  mixed $count  Number of results from offset to display.
+		 * @param  mixed $offset (Default: 0) Offset from first entry in order.
 		 * @return [type]          [description]
 		 */
-		public function list_templates( $count = 50, $offset = 0 ){
+		public function list_templates( $count = 50, $offset = 0 ) {
 			return $this->get_templates( $count, $offset );
 		}
 
@@ -420,7 +420,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'Subject'  => $subject,
 					'HtmlBody' => $htmlbody,
 					'TextBody' => $textbody,
-				)
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/templates/' );
@@ -444,7 +444,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'Subject'  => $subject,
 					'HtmlBody' => $htmlbody,
 					'TextBody' => $textbody,
-				)
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/templates/' . $template_id );
@@ -453,16 +453,16 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/**
 		 * Validate a template.
 		 *
-		 * @param  string $subject         (Default: '') Subject of email
-		 * @param  string $htmlbody        (Default: '') HTML body.
-		 * @param  string $textbody        (Default: '') Plaintext body.
-		 * @param  array  $testrendermodel (Default: array) Test render model obj.
+		 * @param  string  $subject         (Default: '') Subject of email
+		 * @param  string  $htmlbody        (Default: '') HTML body.
+		 * @param  string  $textbody        (Default: '') Plaintext body.
+		 * @param  array   $testrendermodel (Default: array) Test render model obj.
 		 * @param boolean $inlinecss 			 (Default: false) Whether to allow inlinecss through the email.
 		 * @return Object                  Server Response.
 		 */
 		public function validate_template( $subject = '', $htmlbody = '', $textbody = '', $testrendermodel = array(), $inlinecss = false ) {
 
-			if( $subject == '' && $htmlbody == '' && $textbody = '' ){
+			if ( $subject == '' && $htmlbody == '' && $textbody = '' ) {
 				return new WP_Error( 'missing-args', __( 'You must specify at least one of the first three arguments', 'wp-api-libraries' ) );
 			}
 
@@ -474,7 +474,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'TextBody' => $textbody,
 					'TestRenderModel' => $testrendermodel,
 					'InlineCssForHtmlTestRender' => $inlinecss,
-				)
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/templates/validate' );
@@ -483,7 +483,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/**
 		 * Delete a template.
 		 *
-		 * @param  mixed  $template_id ID of template to delete
+		 * @param  mixed $template_id ID of template to delete
 		 * @return Object              Server response
 		 */
 		public function delete_template( $template_id ) {
@@ -512,7 +512,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param  object $attachments 		(Default: array) Attachments.
 		 * @return object                 Server response.
 		 */
-		public function send_email_with_template( $template_id, $template_model, $inlinecss, $from, $to, $cc = '', $bcc = '', $tag = '', $replyto = '', $headers = array(), $trackopens = true, $tracklinks = "HtmlAndText", $attachments = array() ) {
+		public function send_email_with_template( $template_id, $template_model, $inlinecss, $from, $to, $cc = '', $bcc = '', $tag = '', $replyto = '', $headers = array(), $trackopens = true, $tracklinks = 'HtmlAndText', $attachments = array() ) {
 			$args = array(
 				'method' => 'POST',
 				'body'	 => array(
@@ -528,10 +528,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'TrackOpens'    => $trackopens,
 					'TrackLinks'    => $tracklinks,
 					'Attachments'   => $attachments,
-				)
+				),
 			);
 
-			if( $replyto != '' ){
+			if ( $replyto != '' ) {
 				$args['body']['ReplyTo'] = $replyto;
 			}
 
@@ -547,12 +547,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 *                         following the structure from previous emails.
 		 * @return object          The response, an array of responses per message.
 		 */
-		public function send_batch_email_with_templates( $messages ){
+		public function send_batch_email_with_templates( $messages ) {
 			$args = array(
 				'method' => 'POST',
 				'body'   => array(
-					'messages' => $messages
-				)
+					'messages' => $messages,
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/email/batchWithTemplates' );
@@ -590,20 +590,20 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return Object Server response.
 		 */
 		public function edit_the_server( $name = '', $color = '', $raw_email_enabled = '', $smtp_api_activated = '', $inbound_hook_url = '', $bounce_hook_url = '', $open_hook_url = '', $post_first_open_only = '', $track_opens = '', $track_links = '', $inbound_domain = '', $inbound_spam_threshold = '' ) {
-			$keys = array( 'Name', 'Color', 'RawEmailEnabled', 'SmtpApiActivated', 'DeliveryHookUrl', 'InboundHookUrl', 'BounceHookUrl', 'IncludeBounceContentInHook', 'OpenHookUrl', 'PostFirstOpenOnly', 'TrackOpens', 'TrackLinks', 'InboundDomain', 'InboundSpamThreshold');
+			$keys = array( 'Name', 'Color', 'RawEmailEnabled', 'SmtpApiActivated', 'DeliveryHookUrl', 'InboundHookUrl', 'BounceHookUrl', 'IncludeBounceContentInHook', 'OpenHookUrl', 'PostFirstOpenOnly', 'TrackOpens', 'TrackLinks', 'InboundDomain', 'InboundSpamThreshold' );
 			$values = array( $name, $color, $raw_email_enabled, $smtp_api_activated, $inbound_hook_url, $bounce_hook_url, $open_hook_url, $post_first_open_only, $track_opens, $track_links, $inbound_domain, $inbound_spam_threshold );
 			$args = array(
 				'method' => 'PUT',
-				'body' => array()
+				'body' => array(),
 			);
 
-			for( $i=0;$i<count($values);$i++){
-				if( $values[$i] != '' && $key[$i] ){
-					$args[$keys[$i]] = $values[$i];
+			for ( $i = 0;$i < count( $values );$i++ ) {
+				if ( $values[ $i ] != '' && $key[ $i ] ) {
+					$args[ $keys[ $i ] ] = $values[ $i ];
 				}
 			}
 
-			if( count($args['body']) == 0 ){
+			if ( count( $args['body'] ) == 0 ) {
 				return new WP_Error( 'missing-arguments', __( 'You cannot edit a post with no data', 'wp-api-libraries' ) );
 			}
 
@@ -642,20 +642,21 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * 	'InboundDomain' => '',
 		 * 	'InboundSpamThreshold' => '15',
 		 * )
+		 *
 		 * @param object $other_args Object as described above.
 		 */
 		public function add_server( $other_args = array() ) {
 
-			if( gettype( $other_args ) != 'string' && !isset( $other_args['Name'] ) && !isset( $other_args['name'] ) ) {
-				return new WP_Error( 'missing-args', __("You must at least include a Name key/value within the arguments array.") );
+			if ( gettype( $other_args ) != 'string' && ! isset( $other_args['Name'] ) && ! isset( $other_args['name'] ) ) {
+				return new WP_Error( 'missing-args', __( 'You must at least include a Name key/value within the arguments array.' ) );
 			}
 
 			$args = array(
 				'method' => 'POST',
-				'body' => $other_args
+				'body' => $other_args,
 			);
 
-			if( gettype( $other_args ) == 'string' ){
+			if ( gettype( $other_args ) == 'string' ) {
 				$args['body'] = array( 'Name' => $other_args );
 			}
 
@@ -690,7 +691,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		public function edit_server( $server_id, $other_args = array() ) {
 			$args = array(
 				'method' => 'PUT',
-				'body' => $other_args
+				'body' => $other_args,
 			);
 
 			return $this->build_request( $args )->fetch( '/servers/' . $server_id );
@@ -700,9 +701,9 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * list_servers function.
 		 *
 		 * @access public
-		 * @param  mixed  $count  Number of results from offset to display.
-		 * @param  mixed  $offset (Default: 0) Offset from first entry in order.
-		 * @param  mixed  $name 	(Default: null) name of server (search filter).
+		 * @param  mixed $count  Number of results from offset to display.
+		 * @param  mixed $offset (Default: 0) Offset from first entry in order.
+		 * @param  mixed $name     (Default: null) name of server (search filter).
 		 * @return Object Server response.
 		 */
 		public function list_servers( $count = 50, $offset = 0, $name = null ) {
@@ -777,25 +778,26 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/**
 		 * Get Outbound Message Dump
 		 */
-		public function get_outbound_message_dump( $message_id ){
+		public function get_outbound_message_dump( $message_id ) {
 			return $this->build_request()->fetch( '/messages/outbound/' . $message_id . '/dump' );
 		}
 
 		/**
 		 * Search inbound messages
-		 * @param m ixed    $count  Number of results from offset to display.
-		 * @param  mixed    $offset (Default: 0) Offset from first entry in order.
-		 * @param  string   $recipient   recipient
-		 * @param  string   $fromemail   fromemail
-		 * @param  string   $tag         tag
-		 * @param  string   $subject     subject
-		 * @param  string   $mailboxhash mailboxhash
-		 * @param  string   $status      status
-		 * @param  string   $todate      todate
-		 * @param  string   $fromdate    fromdate
+		 *
+		 * @param m ixed $count  Number of results from offset to display.
+		 * @param  mixed  $offset (Default: 0) Offset from first entry in order.
+		 * @param  string $recipient   recipient
+		 * @param  string $fromemail   fromemail
+		 * @param  string $tag         tag
+		 * @param  string $subject     subject
+		 * @param  string $mailboxhash mailboxhash
+		 * @param  string $status      status
+		 * @param  string $todate      todate
+		 * @param  string $fromdate    fromdate
 		 * @return [type]               [description]
 		 */
-		public function search_inbound_messages( $count = 50, $offset = 0, $recipient = null, $fromemail = null, $tag = null, $subject = null, $mailboxhash = null, $status = null, $todate = null, $fromdate = null ){
+		public function search_inbound_messages( $count = 50, $offset = 0, $recipient = null, $fromemail = null, $tag = null, $subject = null, $mailboxhash = null, $status = null, $todate = null, $fromdate = null ) {
 			$request = '/messages/inbound?count=' . $count . '&';
 
 			$request .= http_build_query(array(
@@ -813,17 +815,17 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request()->fetch( $request );
 		}
 
-		public function get_inbound_message_details( $message_id ){
+		public function get_inbound_message_details( $message_id ) {
 			return $this->build_request()->fetch( '/messages/inbound/' . $message_id . '/details' );
 		}
 
-		public function bypass_blocked_inbound_message( $message_id ){
+		public function bypass_blocked_inbound_message( $message_id ) {
 			$args = array( 'method' => 'PUT' );
 
 			return $this->build_request( $args )->fetch( '/messages/inbound/' . $message_id . '/bypass' );
 		}
 
-		public function retry_failed_inbound( $message_id ){
+		public function retry_failed_inbound( $message_id ) {
 			$args = array( 'method' => 'PUT' );
 
 			return $this->build_request( $args )->fetch( '/messages/inbound/' . $message_id . '/retry' );
@@ -834,8 +836,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 *
 		 * @access public
 		 * @param mixed $message_id
-		 * @param mixed  $count  (Default: 50) Number of results from offset to display.
-		 * @param mixed  $offset (Default: 0) Offset from first entry in order.
+		 * @param mixed $count  (Default: 50) Number of results from offset to display.
+		 * @param mixed $offset (Default: 0) Offset from first entry in order.
 		 * @return Object Server response.
 		 */
 		public function get_message_opens( $count = 50, $offset = 0 ) {
@@ -848,7 +850,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request()->fetch( $request );
 		}
 
-		public function get_single_message_opens( $message_id ){
+		public function get_single_message_opens( $message_id ) {
 			return $this->build_request()->fetch( '/messages/outbound/opens/' . $message_id );
 		}
 
@@ -886,7 +888,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				),
 			);
 
-			if( $return_path_domain != '' ){
+			if ( $return_path_domain != '' ) {
 				$args['body']['ReturnPathDomain'] = $return_path_domain;
 			}
 
@@ -897,6 +899,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Interestingly enough, the only option you can edit for a domain is the
 		 * return path. Kinda makes sense? Otherwise delete it and make a new one if
 		 * you want to change the name.
+		 *
 		 * @param  [type] $domain_id          [description]
 		 * @param  [type] $return_path_domain [description]
 		 * @return [type]                     [description]
@@ -907,7 +910,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'method' => 'PUT',
 				'body' => array(
 					'ReturnPathDomain' => $return_path_domain,
-				)
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/domains/' . $domain_id );
@@ -937,8 +940,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @return void
 		 */
 		public function verify_domain_spf_record( $domain_id ) {
-		  $args = array(
-				'method' => 'POST'
+			$args = array(
+				'method' => 'POST',
 			);
 
 			return $this->build_request( $args )->fetch( '/domains/' . $domain_id . '/verifyspf' );
@@ -982,7 +985,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request()->fetch( '/senders/' . $signature_id );
 		}
 
-		public function create_signature( $from_email, $name, $reply_to_email = '', $return_path_domain = '') {
+		public function create_signature( $from_email, $name, $reply_to_email = '', $return_path_domain = '' ) {
 			$args = array(
 				'method' => 'POST',
 				'body' => array(
@@ -990,7 +993,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'Name' => $name,
 					'ReplyToEmail' => $reply_to_email,
 					'ReturnPathDomain' => $return_path_domain,
-				)
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/senders/' );
@@ -1003,7 +1006,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 					'Name' => $name,
 					'ReplyToEmail' => $reply_to_email,
 					'ReturnPathDomain' => $return_path_domain,
-				)
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/senders/' . $signature_id );
@@ -1057,7 +1060,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 */
 		public function get_send_counts( $tag = '', $from_date = '', $to_date = '' ) {
 			$request = '/stats/outbound/sends';
-			if( $tag !== '' || $from_date !== '' ||	$to_date !== '' ){
+			if ( $tag !== '' || $from_date !== '' ||	$to_date !== '' ) {
 				$request .= '?' . http_build_query( array_filter( array(
 					'tag' => $tag,
 					'fromdate' => $from_date,
@@ -1286,7 +1289,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 *
 		 * @access public
 		 * @param mixed $name
-		 * @param bool $track_opens (default: true)
+		 * @param bool  $track_opens (default: true)
 		 * @return void
 		 */
 		public function create_trigger_for_tag( $name, $track_opens = true ) {
@@ -1295,7 +1298,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'body' => array(
 					'MatchName' => $name,
 					'TrackOpens' => $track_opens,
-				)
+				),
 			);
 
 			return $this->build_request( $args )->fetch( '/triggers/tags' );
@@ -1316,8 +1319,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * edit_single_trigger function.
 		 *
 		 * @access public
-		 * @param mixed $trigger_id
-		 * @param mixed $name
+		 * @param mixed  $trigger_id
+		 * @param mixed  $name
 		 * @param string $track_opens (default: '')
 		 * @return void
 		 */
@@ -1325,11 +1328,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			$args = array(
 				'method' => 'PUT',
 				'body' => array(
-					'MatchName' => $name
-				)
+					'MatchName' => $name,
+				),
 			);
 
-			if( $track_opens !== '' ){
+			if ( $track_opens !== '' ) {
 				$args['body']['TrackOpens'] = $track_opens;
 			}
 
@@ -1355,12 +1358,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Search Triggers.
 		 *
 		 * @access public
-		 * @param mixed  $count  (Default: 50) Number of results from offset to display.
-		 * @param mixed  $offset (Default: 0) Offset from first entry in order.
+		 * @param mixed $count  (Default: 50) Number of results from offset to display.
+		 * @param mixed $offset (Default: 0) Offset from first entry in order.
 		 * @param mixed $match_name Match Name (def. '').
 		 * @return Object Server response.
 		 */
-		public function search_triggers( $count = 50, $offset = 0, $match_name = '') {
+		public function search_triggers( $count = 50, $offset = 0, $match_name = '' ) {
 			return $this->build_request()->fetch( '/triggers/tags?match_name=' . $match_name . '&count=' . $count . '&offset=' . $offset );
 		}
 
@@ -1378,8 +1381,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			$args = array(
 				'method' => 'POST',
 				'body' => array(
-					'Rule' => $rule
-				)
+					'Rule' => $rule,
+				),
 			);
 			return $this->build_request( $args )->fetch( '/triggers/inboundrules' );
 		}
@@ -1403,8 +1406,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * List Inbound Rule Triggers.
 		 *
 		 * @access public
-		 * @param mixed  $count  (Default: 500) Number of results from offset to display.
-		 * @param mixed  $offset (Default: 0) Offset from first entry in order.
+		 * @param mixed $count  (Default: 500) Number of results from offset to display.
+		 * @param mixed $offset (Default: 0) Offset from first entry in order.
 		 * @return Object Server response.
 		 */
 		public function list_inbound_triggers( $count = 500, $offset = 0 ) {
