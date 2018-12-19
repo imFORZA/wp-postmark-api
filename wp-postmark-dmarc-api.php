@@ -32,10 +32,23 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 */
 		protected $route_uri = 'https://dmarc.postmarkapp.com';
 
+		/**
+		 * __construct function.
+		 *
+		 * @access public
+		 * @param string $account_token (default: null) Account Token.
+		 * @return void
+		 */
 		public function __construct( string $account_token = null ) {
 			$this->account_token = $account_token;
 		}
 
+		/**
+		 * Set Headers.
+		 *
+		 * @access public
+		 * @return void
+		 */
 		public function set_headers() {
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
@@ -51,9 +64,8 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		 * Create a record.
 		 *
 		 * @access public
-		 * @param string $email
-		 * @param string $domain
-		 * @return void
+		 * @param string $email Email.
+		 * @param string $domain Domain.
 		 */
 		public function create_record( $email, $domain ) {
 			$args = array(
@@ -114,16 +126,15 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 		/**
 		 * List dmarc reports (with optional parameters to specify search).
 		 *
-		 * @param  string $from_date [description]
-		 * @param  string $to_date   [description]
-		 * @param  string $limit     [description]
-		 * @param  string $after     [description]
-		 * @return [type]            [description]
+		 * @param  string $from_date  From Date.
+		 * @param  string $to_date    To Date.
+		 * @param  string $limit      Limit.
+		 * @param  string $after      After.
 		 */
 		public function list_dmarc_reports( $from_date = '', $to_date = '', $limit = '', $after = '' ) {
 
 			$request = '';
-			if (	$from_date === '' &&	$to_date === '' &&	$limit === '' &&	$after === '' ) {
+			if ( '' === $from_date && '' === $to_date &&	'' === $limit && '' === $after ) {
 				$request = '/records/my/reports';
 			} else {
 				$args = array(
@@ -139,11 +150,23 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 			return $request;
 		}
 
+		/**
+		 * Get DMARC Report.
+		 *
+		 * @access public
+		 * @param mixed $dmarc_report_id DMARC Report ID.
+		 */
 		public function get_dmarc_report( $dmarc_report_id ) {
 			return $this->build_request()->fetch( '/records/my/reports' . $dmarc_report_id );
 		}
 
-		// initiate recovery email to email provided at owner. Will return true if email was sent (aka if email is registered to something). Public route.
+
+		/**
+		 * Recover API Token.
+		 *
+		 * @access public
+		 * @param mixed $owner Owner.
+		 */
 		public function recover_api_token( $owner ) {
 			$args = array(
 				'method' => 'POST',
@@ -155,7 +178,12 @@ if ( ! class_exists( 'PostMarkDmarcAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/tokens/recover' );
 		}
 
-		// generate a new api token and replcae your existing one with it.
+
+		/**
+		 * Rotate API Token..
+		 *
+		 * @access public
+		 */
 		public function rotate_api_token() {
 			$args = array(
 				'method' => 'POST',

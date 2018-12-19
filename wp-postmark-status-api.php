@@ -11,13 +11,18 @@
 /* Check if class exists. */
 if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
 
-
 	/**
 	 * PostMarkStatusAPI class.
 	 */
 	class PostMarkStatusAPI extends PostMarkBase {
 
-
+		/**
+		 * __construct function.
+		 *
+		 * @access public
+		 * @param bool $debug (default: false) Debug.
+		 * @return void
+		 */
 		public function __construct( $debug = false ) {
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
@@ -59,18 +64,39 @@ if ( ! class_exists( 'PostMarkStatusAPI' ) ) {
 			return $this->build_request()->fetch( '/list_incidents/' );
 		}
 
+		/**
+		 * Get Incident.
+		 *
+		 * @access public
+		 * @param mixed $incident_id Incident ID.
+		 */
 		public function get_incident( $incident_id ) {
 			return $this->build_request()->fetch( '/incidents/' . $incident_id );
 		}
 
+		/**
+		 * Get Services Status.
+		 *
+		 * @access public
+		 */
 		public function get_services_status() {
 			return $this->build_request()->fetch( '/services/' );
 		}
 
+		/**
+		 * Get Services Availability.
+		 *
+		 * @access public
+		 */
 		public function get_services_availability() {
 			return $this->build_request()->fetch( '/status/availability' );
 		}
 
+		/**
+		 * Get Delivery Stats.
+		 *
+		 * @access public
+		 */
 		public function get_delivery_stats() {
 			return $this->build_request()->fetch( '/delivery/' );
 		}

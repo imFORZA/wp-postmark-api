@@ -40,10 +40,28 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		 */
 		protected $args = array();
 
+		/**
+		 * account_token
+		 *
+		 * @var mixed
+		 * @access protected
+		 */
 		protected $account_token;
 
+		/**
+		 * server_token
+		 *
+		 * @var mixed
+		 * @access protected
+		 */
 		protected $server_token;
 
+		/**
+		 * debug
+		 *
+		 * @var mixed
+		 * @access private
+		 */
 		private $debug;
 
 		/**
@@ -114,13 +132,19 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			$this->args = array();
 		}
 
+		/**
+		 * set_headers function.
+		 *
+		 * @access protected
+		 * @return void
+		 */
 		protected function set_headers() {
 			$this->args['headers'] = array(
 				'Accept' => 'application/json',
 				'Content-Type' => 'application/json',
 			);
 
-			if ( $this->server_token == '' ) {
+			if ( '' === $this->server_token ) {
 				$this->args['headers']['X-Postmark-Account-Token'] = $this->account_token;
 			} else {
 				$this->args['headers']['X-Postmark-Server-Token'] = $this->server_token;
