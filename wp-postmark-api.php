@@ -27,7 +27,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access public
 		 * @static
 		 * @param mixed $emails Emails.
-		 * @return void
 		 */
 		public static function format_email_fields( $emails ) {
 			if ( is_array( $emails ) ) {
@@ -43,7 +42,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access public
 		 * @static
 		 * @param mixed $emails Emails.
-		 * @return void
 		 */
 		public static function fef( $emails ) {
 			return self::format_email_fields( $emails );
@@ -59,15 +57,15 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param string $to [REQUIRED] Recipient email address. Multiple addresses are comma seperated. Max 50.
 		 * @param string $cc Cc recipient email address. Multiple addresses are comma seperated. Max 50.
 		 * @param string $bcc Bcc recipient email address. Multiple addresses are comma seperated. Max 50.
-		 * @param string $subject Email subject
+		 * @param string $subject Email subject.
 		 * @param string $tag Email tag that allows you to categorize outgoing emails and get detailed statistics.
-		 * @param string $html_body [REQUIRED] HTML email message (If no TextBody specified)
-		 * @param string $text_body [REQUIRED] Plain text email message (If no HtmlBody specified)
-		 * @param string $replyto Reply To override email address. Defaults to the Reply To set in the sender signature.
+		 * @param string $html_body [REQUIRED] HTML email message (If no TextBody specified).
+		 * @param string $text_body [REQUIRED] Plain text email message (If no HtmlBody specified).
+		 * @param string $reply_to Reply To override email address. Defaults to the Reply To set in the sender signature.
 		 * @param object $headers List of custom headers to include.
 		 * @param bool   $track_opens Activate open tracking for this email.
 		 * @param string $track_links Activate link tracking for links in the HTML or Text bodies of this email.
-		 * @param object $attachments 	List of attachments
+		 * @param object $attachments 	List of attachments.
 		 * @return Object Server response.
 		 */
 		public function send_email( $from, $to, $cc, $bcc, $subject, $tag, $html_body, $text_body, $reply_to = '', $headers = array(), $track_opens = true, $track_links = 'HtmlAndText', $attachments = array() ) {
@@ -112,15 +110,15 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param mixed $to [REQUIRED] Recipient email address. Multiple addresses are comma seperated. Max 50.
 		 * @param mixed $cc Cc recipient email address. Multiple addresses are comma seperated. Max 50.
 		 * @param mixed $bcc Bcc recipient email address. Multiple addresses are comma seperated. Max 50.
-		 * @param mixed $subject Email subject
+		 * @param mixed $subject Email subject.
 		 * @param mixed $tag Email tag that allows you to categorize outgoing emails and get detailed statistics.
-		 * @param mixed $html_body [REQUIRED] HTML email message (If no TextBody specified)
-		 * @param mixed $text_body [REQUIRED] Plain text email message (If no HtmlBody specified)
+		 * @param mixed $html_body [REQUIRED] HTML email message (If no TextBody specified).
+		 * @param mixed $text_body [REQUIRED] Plain text email message (If no HtmlBody specified).
 		 * @param mixed $replyto Reply To override email address. Defaults to the Reply To set in the sender signature.
 		 * @param mixed $headers List of custom headers to include.
 		 * @param mixed $track_opens Activate open tracking for this email.
 		 * @param mixed $track_links Activate link tracking for links in the HTML or Text bodies of this email.
-		 * @param mixed $attachments 	List of attachments
+		 * @param mixed $attachments 	List of attachments.
 		 * @return Object Server response.
 		 */
 		public function send_batch_emails( $emails ) {
@@ -380,7 +378,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* TEMPLATES. */
 
 		/**
-		 * Get Templates. AKA List Templates
+		 * Get Templates. AKA List Templates.
 		 *
 		 * @access public
 		 * @param  mixed $count  Number of results from offset to display.
@@ -392,7 +390,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * List templates. Redirects to get_templates()
+		 * List templates. Redirects to get_templates().
 		 *
 		 * @param  mixed $count  Number of results from offset to display.
 		 * @param  mixed $offset (Default: 0) Offset from first entry in order.
@@ -414,14 +412,14 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * Create a template
+		 * Create a template.
 		 * https://api.postmarkapp.com/templates
 		 *
-		 * @param  string $name     name
-		 * @param  string $subject  subject
-		 * @param  string $htmlbody htmlbody
-		 * @param  string $textbody textbody
-		 * @return Object           Server response
+		 * @param  string $name     Name.
+		 * @param  string $subject  Subject.
+		 * @param  string $htmlbody Htmlbody.
+		 * @param  string $textbody Textbody.
+		 * @return Object           Server response.
 		 */
 		public function create_template( $name, $subject, $htmlbody, $textbody ) {
 			$args = array(
@@ -441,12 +439,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Edit template.
 		 * Subject, html body and text body are required, name is optional.
 		 *
-		 * @param  mixed  $template_id template_id
-		 * @param  string $subject     subject
-		 * @param  string $html_body   html_body
-		 * @param  string $text_body   text_body
-		 * @param  string $name        (Default: '') name
-		 * @return [type]              [description]
+		 * @param  mixed  $template_id Template ID.
+		 * @param  string $subject     Subject.
+		 * @param  string $html_body   Html_body.
+		 * @param  string $text_body   Text_body.
+		 * @param  string $name        (Default: '') name.
 		 */
 		public function edit_template( $template_id, $subject, $html_body, $text_body, $name = '' ) {
 			$args = array(
@@ -464,7 +461,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/**
 		 * Validate a template.
 		 *
-		 * @param  string  $subject         (Default: '') Subject of email
+		 * @param  string  $subject         (Default: '') Subject of email.
 		 * @param  string  $htmlbody        (Default: '') HTML body.
 		 * @param  string  $textbody        (Default: '') Plaintext body.
 		 * @param  array   $testrendermodel (Default: array) Test render model obj.
@@ -494,8 +491,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/**
 		 * Delete a template.
 		 *
-		 * @param  mixed $template_id ID of template to delete
-		 * @return Object              Server response
+		 * @param  mixed $template_id ID of template to delete.
+		 * @return Object              Server response.
 		 */
 		public function delete_template( $template_id ) {
 			$args = array(
@@ -542,7 +539,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				),
 			);
 
-			if ( $replyto != '' ) {
+			if ( '' !== $replyto ) {
 				$args['body']['ReplyTo'] = $replyto;
 			}
 
@@ -550,11 +547,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * Send batch with templates
+		 * Send batch with templates.
 		 *
 		 * @link https://postmarkapp.com/developer/api/templates-api#send-batch-with-templates
 		 *
-		 * @param  array $messages An array of messages to send, each being an email
+		 * @param  array $messages An array of messages to send, each being an email.
 		 *                         following the structure from previous emails.
 		 * @return object          The response, an array of responses per message.
 		 */
@@ -582,22 +579,22 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * edit_server function.
+		 * Edit Server.
 		 * If you want to reset/clear a value, pass in a space character (ie: " ").
 		 *
 		 * @access public
-		 * @param mixed $name										(Default: '') Name
-		 * @param mixed $color									(Default: '') Color
-		 * @param mixed $raw_email_enabled			(Default: '') Raw email embedded
-		 * @param mixed $smtp_api_activated			(Default: '') SMTP API Activated
-		 * @param mixed $inbound_hook_url				(Default: '') Inbound hook url
-		 * @param mixed $bounce_hook_url				(Default: '') Bounce hook url
-		 * @param mixed $open_hook_url					(Default: '') Open hook url
-		 * @param mixed $post_first_open_only		(Default: '') Post first open only
-		 * @param mixed $track_opens						(Default: '') Track opens
-		 * @param mixed $track_links						(Default: '') Track links
-		 * @param mixed $inbound_domain					(Default: '') Inbound domain
-		 * @param mixed $inbound_spam_threshold	(Default: '') Inbound spam threshhold
+		 * @param mixed $name										(Default: '') Name.
+		 * @param mixed $color									(Default: '') Color.
+		 * @param mixed $raw_email_enabled			(Default: '') Raw email embedded.
+		 * @param mixed $smtp_api_activated			(Default: '') SMTP API Activated.
+		 * @param mixed $inbound_hook_url				(Default: '') Inbound hook url.
+		 * @param mixed $bounce_hook_url				(Default: '') Bounce hook url.
+		 * @param mixed $open_hook_url					(Default: '') Open hook url.
+		 * @param mixed $post_first_open_only		(Default: '') Post first open only.
+		 * @param mixed $track_opens						(Default: '') Track opens.
+		 * @param mixed $track_links						(Default: '') Track links.
+		 * @param mixed $inbound_domain					(Default: '') Inbound domain.
+		 * @param mixed $inbound_spam_threshold	(Default: '') Inbound spam threshhold.
 		 * @return Object Server response.
 		 */
 		public function edit_the_server( $name = '', $color = '', $raw_email_enabled = '', $smtp_api_activated = '', $inbound_hook_url = '', $bounce_hook_url = '', $open_hook_url = '', $post_first_open_only = '', $track_opens = '', $track_links = '', $inbound_domain = '', $inbound_spam_threshold = '' ) {
@@ -658,7 +655,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 */
 		public function add_server( $other_args = array() ) {
 
-			if ( gettype( $other_args ) != 'string' && ! isset( $other_args['Name'] ) && ! isset( $other_args['name'] ) ) {
+			if ( gettype( $other_args ) !== 'string' && ! isset( $other_args['Name'] ) && ! isset( $other_args['name'] ) ) {
 				return new WP_Error( 'missing-args', __( 'You must at least include a Name key/value within the arguments array.' ) );
 			}
 
@@ -667,7 +664,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				'body' => $other_args,
 			);
 
-			if ( gettype( $other_args ) == 'string' ) {
+			if ( gettype( $other_args ) === 'string' ) {
 				$args['body'] = array( 'Name' => $other_args );
 			}
 
@@ -738,38 +735,33 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* MESSAGES. */
 
+
 		/**
 		 * Search Outbound Messages.
 		 *
 		 * @access public
-		 * @param mixed $count  Number of results from offset to display.
-		 * @param mixed $offset (Default: 0) Offset from first entry in order.
-		 * @param mixed $recipient Recipient.
-		 * @param mixed $tag Tag.
-		 * @param mixed $client_name Client Name.
-		 * @param mixed $client_company Client Company.
-		 * @param mixed $client_family Client Family.
-		 * @param mixed $os_name OS Name.
-		 * @param mixed $os_family OS Family.
-		 * @param mixed $os_company OS Company.
-		 * @param mixed $platform Platform.
-		 * @param mixed $country Country.
-		 * @param mixed $region Region.
-		 * @param mixed $city City.
-		 * @return Object Server response.
+		 * @param int   $count (default: 50) Count.
+		 * @param int   $offset (default: 0) Offset.
+		 * @param mixed $recipient (default: null) Recipient.
+		 * @param mixed $from_email (default: null) From Email.
+		 * @param mixed $tag (default: null) Tag.
+		 * @param mixed $status (default: null) Status.
+		 * @param mixed $to_date (default: null) To Date.
+		 * @param mixed $from_date (default: null) From Date.
+		 * @return void
 		 */
-		public function search_outbound_messages( $count = 50, $offset = 0, $recipient = null, $fromemail = null, $tag = null, $status = null, $todate = null, $fromdate = null ) {
+		public function search_outbound_messages( $count = 50, $offset = 0, $recipient = null, $from_email = null, $tag = null, $status = null, $to_date = null, $from_date = null ) {
 
 			$request = '/messages/outbound?count=' . $count . '&offset=' . $offset;
 
 			$request .= http_build_query(array(
 				'offset'    => $offset,
 				'recipient' => $recipient,
-				'fromemail' => $fromemail,
+				'fromemail' => $from_email,
 				'tag'       => $tag,
 				'status'    => $status,
-				'todate'    => $todate,
-				'fromdate'  => $fromdate,
+				'todate'    => $to_date,
+				'fromdate'  => $from_date,
 			));
 
 			return $this->build_request()->fetch( $request );
@@ -792,7 +784,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 *
 		 * @access public
 		 * @param mixed $message_id Message ID.
-		 * @return void
 		 */
 		public function get_outbound_message_dump( $message_id ) {
 			return $this->build_request()->fetch( '/messages/outbound/' . $message_id . '/dump' );
@@ -830,16 +821,34 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request()->fetch( $request );
 		}
 
+		/**
+		 * Get_inbound_message_details function.
+		 *
+		 * @access public
+		 * @param mixed $message_id Message ID.
+		 */
 		public function get_inbound_message_details( $message_id ) {
 			return $this->build_request()->fetch( '/messages/inbound/' . $message_id . '/details' );
 		}
 
+		/**
+		 * Bypass_blocked_inbound_message function.
+		 *
+		 * @access public
+		 * @param mixed $message_id Message ID.
+		 */
 		public function bypass_blocked_inbound_message( $message_id ) {
 			$args = array( 'method' => 'PUT' );
 
 			return $this->build_request( $args )->fetch( '/messages/inbound/' . $message_id . '/bypass' );
 		}
 
+		/**
+		 * Retry_failed_inbound function.
+		 *
+		 * @access public
+		 * @param mixed $message_id Message ID.
+		 */
 		public function retry_failed_inbound( $message_id ) {
 			$args = array( 'method' => 'PUT' );
 
@@ -847,10 +856,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_message_opens function.
+		 * Get_message_opens function.
 		 *
 		 * @access public
-		 * @param mixed $message_id
+		 * @param mixed $message_id Message ID.
 		 * @param mixed $count  (Default: 50) Number of results from offset to display.
 		 * @param mixed $offset (Default: 0) Offset from first entry in order.
 		 * @return Object Server response.
@@ -887,13 +896,20 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Get Domain Details.
 		 *
 		 * @access public
-		 * @param mixed $domain_id
+		 * @param mixed $domain_id Domain ID.
 		 * @return Object Server response.
 		 */
 		public function get_domain_details( $domain_id ) {
 			return $this->build_request()->fetch( '/domains/' . $domain_id );
 		}
 
+		/**
+		 * Add Domain.
+		 *
+		 * @access public
+		 * @param mixed  $name Name.
+		 * @param string $return_path_domain (default: '') Return Path Domain.
+		 */
 		public function add_domain( $name, $return_path_domain = '' ) {
 
 			$args = array(
@@ -903,7 +919,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				),
 			);
 
-			if ( $return_path_domain != '' ) {
+			if ( '' !== $return_path_domain ) {
 				$args['body']['ReturnPathDomain'] = $return_path_domain;
 			}
 
@@ -915,9 +931,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * return path. Kinda makes sense? Otherwise delete it and make a new one if
 		 * you want to change the name.
 		 *
-		 * @param  [type] $domain_id          [description]
-		 * @param  [type] $return_path_domain [description]
-		 * @return [type]                     [description]
+		 * @param  [type] $domain_id          Domain ID.
+		 * @param  [type] $return_path_domain Return Path Domain.
 		 */
 		public function edit_domain( $domain_id, $return_path_domain ) {
 
@@ -932,11 +947,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * delete_domain function.
+		 * Delete Domain.
 		 *
 		 * @access public
-		 * @param mixed $domain_id
-		 * @return void
+		 * @param mixed $domain_id Domain ID.
 		 */
 		public function delete_domain( $domain_id ) {
 
@@ -948,11 +962,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * verify_domain_spf_record function.
+		 * Verify_domain_spf_record function.
 		 *
 		 * @access public
-		 * @param mixed $domain_id
-		 * @return void
+		 * @param mixed $domain_id Domain ID.
 		 */
 		public function verify_domain_spf_record( $domain_id ) {
 			$args = array(
@@ -963,11 +976,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * rotate_dkim_keys function.
+		 * Rotate_dkim_keys function.
 		 *
 		 * @access public
-		 * @param mixed $domain_id
-		 * @return void
+		 * @param mixed $domain_id Domain ID.
 		 */
 		public function rotate_dkim_keys( $domain_id ) {
 			$args = array(
@@ -979,27 +991,39 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* SENDER SIGNATURES */
 
+
 		/**
-		 * list_sender_signatures function.
+		 * List Sender Signatures.
 		 *
 		 * @access public
-		 * @return Object Server response.
+		 * @param int $count (default: 500) Count.
+		 * @param int $offset (default: 0) Offset.
+		 * @return void
 		 */
 		public function list_sender_signatures( $count = 500, $offset = 0 ) {
 			return $this->build_request()->fetch( "/senders?count=$count&offset=$offset" );
 		}
 
 		/**
-		 * get_sender_signatures_details function.
+		 * Get Sender Signature Details.
 		 *
 		 * @access public
-		 * @param mixed $signature_id
+		 * @param mixed $signature_id Signature ID.
 		 * @return Object Server response.
 		 */
 		public function get_sender_signatures_details( $signature_id ) {
 			return $this->build_request()->fetch( '/senders/' . $signature_id );
 		}
 
+		/**
+		 * Create_signature function.
+		 *
+		 * @access public
+		 * @param mixed  $from_email From Email.
+		 * @param mixed  $name Name.
+		 * @param string $reply_to_email (default: '') Reply to Email.
+		 * @param string $return_path_domain (default: '') Return Path Domain.
+		 */
 		public function create_signature( $from_email, $name, $reply_to_email = '', $return_path_domain = '' ) {
 			$args = array(
 				'method' => 'POST',
@@ -1014,6 +1038,15 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/senders/' );
 		}
 
+		/**
+		 * Edit Signatures.
+		 *
+		 * @access public
+		 * @param mixed  $signature_id Signature ID.
+		 * @param mixed  $name Name.
+		 * @param string $reply_to_email (default: '') Reply to Email.
+		 * @param string $return_path_domain (default: '') Return Path Domain.
+		 */
 		public function edit_signature( $signature_id, $name, $reply_to_email = '', $return_path_domain = '' ) {
 			$args = array(
 				'method' => 'PUT',
@@ -1027,6 +1060,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/senders/' . $signature_id );
 		}
 
+		/**
+		 * Delete Signature.
+		 *
+		 * @access public
+		 * @param mixed $signature_id Signature ID.
+		 */
 		public function delete_signature( $signature_id ) {
 			$args = array(
 				'method' => 'DELETE',
@@ -1035,6 +1074,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request( $args )->fetch( '/senders/' . $signature_id );
 		}
 
+		/**
+		 * Resend Confirmation.
+		 *
+		 * @access public
+		 * @param mixed $signature_id Signature ID.
+		 */
 		public function resend_confirmation( $signature_id ) {
 			$args = array(
 				'method' => 'POST',
@@ -1046,12 +1091,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* STATS. */
 
 		/**
-		 * get_outbound_stats function.
+		 * Get Outbound Stats.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_outbound_stats( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1065,17 +1110,17 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_send_counts function.
+		 * Get Send Counts.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_send_counts( $tag = '', $from_date = '', $to_date = '' ) {
 			$request = '/stats/outbound/sends';
-			if ( $tag !== '' || $from_date !== '' ||	$to_date !== '' ) {
+			if ( '' !== $tag || '' !== $from_date || '' !== $to_date ) {
 				$request .= '?' . http_build_query( array_filter( array(
 					'tag' => $tag,
 					'fromdate' => $from_date,
@@ -1087,12 +1132,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_bounce_counts function.
+		 * Get Bounce Counts.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_bounce_counts( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1106,12 +1151,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_spam_complaints function.
+		 * Get Spam Complaints.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_spam_complaints( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1125,12 +1170,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_tracked_email_counts function.
+		 * Get Tracked Email Counts.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_tracked_email_counts( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1144,12 +1189,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_email_open_counts function.
+		 * Get Email Open Counts.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_email_open_counts( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1163,12 +1208,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_email_platform_usage function.
+		 * Get Email Platform Usage.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_email_platform_usage( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1182,12 +1227,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_email_client_usage function.
+		 * Get Email Client Usage.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_email_client_usage( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1202,12 +1247,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_email_read_times function.
+		 * Get Email Read Times.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_email_read_times( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1221,12 +1266,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_click_counts function.
+		 * Get Click Counts.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_click_counts( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1240,12 +1285,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_browser_usage function.
+		 * Get Browser Usage.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_browser_usage( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1259,12 +1304,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_browser_platform_usage function.
+		 * Get Browser Platform Usage.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_browser_platform_usage( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1304,7 +1349,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access public
 		 * @param mixed $name Name.
 		 * @param bool  $track_opens (default: true) Track Opens.
-		 * @return void
 		 */
 		public function create_trigger_for_tag( $name, $track_opens = true ) {
 			$args = array(
@@ -1323,7 +1367,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 *
 		 * @access public
 		 * @param mixed $trigger_id Trigger ID.
-		 * @return void
 		 */
 		public function get_single_trigger( $trigger_id ) {
 			return $this->build_request()->fetch( '/triggers/tags/' . $trigger_id );
@@ -1345,7 +1388,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 				),
 			);
 
-			if ( $track_opens !== '' ) {
+			if ( '' !== $track_opens ) {
 				$args['body']['TrackOpens'] = $track_opens;
 			}
 
@@ -1386,7 +1429,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 *
 		 * @access public
 		 * @param mixed $rule Rule.
-		 * @return void
 		 */
 		public function create_trigger_for_inbound_rule( $rule ) {
 			$args = array(
@@ -1403,7 +1445,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 *
 		 * @access public
 		 * @param mixed $trigger_id Trigger ID.
-		 * @return void
 		 */
 		public function delete_single_inbound_trigger( $trigger_id ) {
 			$args = array(
