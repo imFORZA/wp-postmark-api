@@ -20,11 +20,14 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 	 */
 	class PostMarkAPI extends PostMarkBase {
 
+
 		/**
-		 * TODO: filter the emails more.
+		 * Format Email Fields.
 		 *
-		 * @param  [type] $emails [description]
-		 * @return [type]         [description]
+		 * @access public
+		 * @static
+		 * @param mixed $emails Emails.
+		 * @return void
 		 */
 		public static function format_email_fields( $emails ) {
 			if ( is_array( $emails ) ) {
@@ -34,6 +37,14 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $emails;
 		}
 
+		/**
+		 * FEF???.
+		 *
+		 * @access public
+		 * @static
+		 * @param mixed $emails Emails.
+		 * @return void
+		 */
 		public static function fef( $emails ) {
 			return self::format_email_fields( $emails );
 		}
@@ -462,8 +473,8 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 */
 		public function validate_template( $subject = '', $htmlbody = '', $textbody = '', $testrendermodel = array(), $inlinecss = false ) {
 
-			if ( $subject == '' && $htmlbody == '' && $textbody = '' ) {
-				return new WP_Error( 'missing-args', __( 'You must specify at least one of the first three arguments', 'wp-api-libraries' ) );
+			if ( '' === $subject && '' === $htmlbody && '' === $textbody ) {
+				return new WP_Error( 'missing-args', __( 'You must specify at least one of the first three arguments', 'wp-postmark-api' ) );
 			}
 
 			$args = array(
@@ -598,13 +609,13 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			);
 
 			for ( $i = 0;$i < count( $values );$i++ ) {
-				if ( $values[ $i ] != '' && $key[ $i ] ) {
+				if ( '' !== $values[ $i ] && $key[ $i ] ) {
 					$args[ $keys[ $i ] ] = $values[ $i ];
 				}
 			}
 
-			if ( count( $args['body'] ) == 0 ) {
-				return new WP_Error( 'missing-arguments', __( 'You cannot edit a post with no data', 'wp-api-libraries' ) );
+			if ( 0 === count( $args['body'] ) ) {
+				return new WP_Error( 'missing-arguments', __( 'You cannot edit a post with no data.', 'wp-postmark-api' ) );
 			}
 
 			return $this->build_request( $args )->fetch( '/server/' );
@@ -728,23 +739,23 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		/* MESSAGES. */
 
 		/**
-		 * search_message_opens function.
+		 * Search Outbound Messages.
 		 *
 		 * @access public
 		 * @param mixed $count  Number of results from offset to display.
 		 * @param mixed $offset (Default: 0) Offset from first entry in order.
-		 * @param mixed $recipient
-		 * @param mixed $tag
-		 * @param mixed $client_name
-		 * @param mixed $client_company
-		 * @param mixed $client_family
-		 * @param mixed $os_name
-		 * @param mixed $os_family
-		 * @param mixed $os_company
-		 * @param mixed $platform
-		 * @param mixed $country
-		 * @param mixed $region
-		 * @param mixed $city
+		 * @param mixed $recipient Recipient.
+		 * @param mixed $tag Tag.
+		 * @param mixed $client_name Client Name.
+		 * @param mixed $client_company Client Company.
+		 * @param mixed $client_family Client Family.
+		 * @param mixed $os_name OS Name.
+		 * @param mixed $os_family OS Family.
+		 * @param mixed $os_company OS Company.
+		 * @param mixed $platform Platform.
+		 * @param mixed $country Country.
+		 * @param mixed $region Region.
+		 * @param mixed $city City.
 		 * @return Object Server response.
 		 */
 		public function search_outbound_messages( $count = 50, $offset = 0, $recipient = null, $fromemail = null, $tag = null, $status = null, $todate = null, $fromdate = null ) {
@@ -765,37 +776,41 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * Get Outbound Message Details
+		 * Get Outbound Message Details.
 		 *
 		 * @access public
-		 * @param mixed $message_id
+		 * @param mixed $message_id Message ID.
 		 * @return Object Server response.
 		 */
 		public function get_outbound_message_details( $message_id ) {
 			return $this->build_request()->fetch( '/messages/outbound/' . $message_id . '/details' );
 		}
 
+
 		/**
-		 * Get Outbound Message Dump
+		 * Get Outbound Message Dump.
+		 *
+		 * @access public
+		 * @param mixed $message_id Message ID.
+		 * @return void
 		 */
 		public function get_outbound_message_dump( $message_id ) {
 			return $this->build_request()->fetch( '/messages/outbound/' . $message_id . '/dump' );
 		}
 
 		/**
-		 * Search inbound messages
+		 * Search inbound messages.
 		 *
 		 * @param m ixed $count  Number of results from offset to display.
 		 * @param  mixed  $offset (Default: 0) Offset from first entry in order.
-		 * @param  string $recipient   recipient
-		 * @param  string $fromemail   fromemail
-		 * @param  string $tag         tag
-		 * @param  string $subject     subject
-		 * @param  string $mailboxhash mailboxhash
-		 * @param  string $status      status
-		 * @param  string $todate      todate
-		 * @param  string $fromdate    fromdate
-		 * @return [type]               [description]
+		 * @param  string $recipient   Recipient.
+		 * @param  string $fromemail   Fromemail.
+		 * @param  string $tag         Tag.
+		 * @param  string $subject     Subject.
+		 * @param  string $mailboxhash Mailboxhash.
+		 * @param  string $status      Status.
+		 * @param  string $todate      Todate.
+		 * @param  string $fromdate    Fromdate.
 		 */
 		public function search_inbound_messages( $count = 50, $offset = 0, $recipient = null, $fromemail = null, $tag = null, $subject = null, $mailboxhash = null, $status = null, $todate = null, $fromdate = null ) {
 			$request = '/messages/inbound?count=' . $count . '&';
@@ -1263,12 +1278,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_click_location function.
+		 * Get Click Location.
 		 *
 		 * @access public
-		 * @param mixed $tag
-		 * @param mixed $from_date
-		 * @param mixed $to_date
+		 * @param mixed $tag Tag.
+		 * @param mixed $from_date From Date.
+		 * @param mixed $to_date To Date.
 		 * @return Object Server response.
 		 */
 		public function get_click_location( $tag = '', $from_date = '', $to_date = '' ) {
@@ -1283,13 +1298,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* TRIGGERS. */
 
-
 		/**
-		 * create_trigger_for_tag function.
+		 * Create Trigger for Tag.
 		 *
 		 * @access public
-		 * @param mixed $name
-		 * @param bool  $track_opens (default: true)
+		 * @param mixed $name Name.
+		 * @param bool  $track_opens (default: true) Track Opens.
 		 * @return void
 		 */
 		public function create_trigger_for_tag( $name, $track_opens = true ) {
@@ -1305,10 +1319,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_single_trigger function.
+		 * Get Single Trigger.
 		 *
 		 * @access public
-		 * @param mixed $trigger_id
+		 * @param mixed $trigger_id Trigger ID.
 		 * @return void
 		 */
 		public function get_single_trigger( $trigger_id ) {
@@ -1316,13 +1330,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * edit_single_trigger function.
+		 * Edit Trigger.
 		 *
 		 * @access public
-		 * @param mixed  $trigger_id
-		 * @param mixed  $name
-		 * @param string $track_opens (default: '')
-		 * @return void
+		 * @param mixed  $trigger_id Trigger ID.
+		 * @param mixed  $name Name.
+		 * @param string $track_opens (default: '') Track Opens.
 		 */
 		public function edit_single_trigger( $trigger_id, $name, $track_opens = '' ) {
 			$args = array(
@@ -1340,11 +1353,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * delete_single_trigger function.
+		 * Delete Single Trigger.
 		 *
 		 * @access public
-		 * @param mixed $trigger_id
-		 * @return void
+		 * @param mixed $trigger_id Trigger ID.
 		 */
 		public function delete_single_trigger( $trigger_id ) {
 			$args = array(
@@ -1369,12 +1381,11 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* Inbound Rules Triggers */
 
-
 		/**
-		 * create_trigger_for_inbound_rule function.
+		 * Create Trigger for Inbound Rule.
 		 *
 		 * @access public
-		 * @param mixed $rule
+		 * @param mixed $rule Rule.
 		 * @return void
 		 */
 		public function create_trigger_for_inbound_rule( $rule ) {
@@ -1388,10 +1399,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * delete_single_inbound_trigger function.
+		 * Delete Single Inbound Trigger.
 		 *
 		 * @access public
-		 * @param mixed $trigger_id
+		 * @param mixed $trigger_id Trigger ID.
 		 * @return void
 		 */
 		public function delete_single_inbound_trigger( $trigger_id ) {
