@@ -619,10 +619,10 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * get_server function.
+		 * Get Server.
 		 *
 		 * @access public
-		 * @param mixed $server_id
+		 * @param mixed $server_id Server ID.
 		 * @return Object Server response.
 		 */
 		public function get_server( $server_id ) {
@@ -633,23 +633,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Add a server. Possible values to pass into other_args are below (along with their default values).
 		 * You do not need to have every key and value there, only name is mandatory.
 		 * You can alternatively pass in a single string as the name of the server to be created.
-		 *
-		 * array(
-		 * 	'name' => '',
-		 * 	'Color' => 'Green',
-		 * 	'SmtpApiActivated' => true,
-		 * 	'RawEmailEnabled' => true,
-		 * 	'DeliveryHookUrl' => '',
-		 * 	'InboundHookUrl' => '',
-		 * 	'BounceHookUrl' => '',
-		 * 	'IncludeBounceContentInHook' => '',
-		 * 	'OpenHookUrl' => '',
-		 * 	'PostFirstOpenOnly' => true,
-		 * 	'TrackOpens' => true,
-		 * 	'TrackLinks' => 'HtmlAndText',
-		 * 	'InboundDomain' => '',
-		 * 	'InboundSpamThreshold' => '15',
-		 * )
 		 *
 		 * @param object $other_args Object as described above.
 		 */
@@ -675,23 +658,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Edit a server.
 		 * Pass in an object with the values you'd like to change.
 		 *
-		 * array(
-		 * 	'name' => '',
-		 * 	'Color' => 'Green',
-		 * 	'SmtpApiActivated' => true,
-		 * 	'RawEmailEnabled' => true,
-		 * 	'DeliveryHookUrl' => '',
-		 * 	'InboundHookUrl' => '',
-		 * 	'BounceHookUrl' => '',
-		 * 	'IncludeBounceContentInHook' => '',
-		 * 	'OpenHookUrl' => '',
-		 * 	'PostFirstOpenOnly' => true,
-		 * 	'TrackOpens' => true,
-		 * 	'TrackLinks' => 'HtmlAndText',
-		 * 	'InboundDomain' => '',
-		 * 	'InboundSpamThreshold' => '15',
-		 * )
-		 *
 		 * @param  mixed  $server_id  server id.
 		 * @param  object $other_args arguments to modify.
 		 * @return object             Server response.
@@ -706,7 +672,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		}
 
 		/**
-		 * list_servers function.
+		 * List Servers.
 		 *
 		 * @access public
 		 * @param  mixed $count  Number of results from offset to display.
@@ -735,7 +701,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 
 		/* MESSAGES. */
 
-
 		/**
 		 * Search Outbound Messages.
 		 *
@@ -748,7 +713,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @param mixed $status (default: null) Status.
 		 * @param mixed $to_date (default: null) To Date.
 		 * @param mixed $from_date (default: null) From Date.
-		 * @return void
 		 */
 		public function search_outbound_messages( $count = 50, $offset = 0, $recipient = null, $from_email = null, $tag = null, $status = null, $to_date = null, $from_date = null ) {
 
@@ -859,7 +823,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * Get_message_opens function.
 		 *
 		 * @access public
-		 * @param mixed $message_id Message ID.
 		 * @param mixed $count  (Default: 50) Number of results from offset to display.
 		 * @param mixed $offset (Default: 0) Offset from first entry in order.
 		 * @return Object Server response.
@@ -874,6 +837,12 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 			return $this->build_request()->fetch( $request );
 		}
 
+		/**
+		 * Get_single_message_opens function.
+		 *
+		 * @access public
+		 * @param mixed $message_id Message ID.
+		 */
 		public function get_single_message_opens( $message_id ) {
 			return $this->build_request()->fetch( '/messages/outbound/opens/' . $message_id );
 		}
@@ -884,7 +853,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * List Domains.
 		 *
 		 * @access public
-		 * @param int $count (default: 500) Count. Max 500
+		 * @param int $count (default: 500) Count. Max 500.
 		 * @param int $offset (default: 0) Offset.
 		 * @return Object Server response.
 		 */
@@ -998,7 +967,6 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 * @access public
 		 * @param int $count (default: 500) Count.
 		 * @param int $offset (default: 0) Offset.
-		 * @return void
 		 */
 		public function list_sender_signatures( $count = 500, $offset = 0 ) {
 			return $this->build_request()->fetch( "/senders?count=$count&offset=$offset" );
