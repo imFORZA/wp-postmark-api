@@ -26,7 +26,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		protected $route_uri = 'https://api.postmarkapp.com';
 
 		/**
-		 * blackhole_email
+		 * Blackhole Email.
 		 *
 		 * (default value: 'test@blackhole.postmarkapp.com')
 		 *
@@ -36,12 +36,17 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		protected $blackhole_email = 'test@blackhole.postmarkapp.com';
 
 		/**
-		 * Arguments to be used by fetch.
+		 * Arguments used by Fetch.
+		 *
+		 * (default value: array())
+		 *
+		 * @var array
+		 * @access protected
 		 */
 		protected $args = array();
 
 		/**
-		 * account_token
+		 * Account Token.
 		 *
 		 * @var mixed
 		 * @access protected
@@ -49,7 +54,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		protected $account_token;
 
 		/**
-		 * server_token
+		 * Server Token.
 		 *
 		 * @var mixed
 		 * @access protected
@@ -57,19 +62,21 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		protected $server_token;
 
 		/**
-		 * debug
+		 * Debug.
 		 *
 		 * @var mixed
 		 * @access private
 		 */
 		private $debug;
 
+
 		/**
 		 * __construct function.
 		 *
 		 * @access public
-		 * @param mixed $account_token
-		 * @param mixed $server_token
+		 * @param mixed  $account_token Account Token.
+		 * @param string $server_token (default: '') Server Token.
+		 * @param bool   $debug (default: false) Debug.
 		 * @return void
 		 */
 		public function __construct( $account_token, $server_token = '', bool $debug = false ) {
@@ -78,12 +85,12 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			$this->debug = $debug;
 		}
 
+
 		/**
-		 * Fetch the request from the API.
+		 * Fetch.
 		 *
-		 * @access private
-		 * @param mixed $request Request URL.
-		 * @return $body Body.
+		 * @access protected
+		 * @param mixed $route Route.
 		 */
 		protected function fetch( $route ) {
 
@@ -105,6 +112,12 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 			return $body;
 		}
 
+		/**
+		 * Build Request.
+		 *
+		 * @access protected
+		 * @param array $args (default: array()) Args.
+		 */
 		protected function build_request( $args = array() ) {
 			$this->set_headers();
 
@@ -133,7 +146,7 @@ if ( ! class_exists( 'PostMarkBase' ) ) {
 		}
 
 		/**
-		 * set_headers function.
+		 * Set Headers.
 		 *
 		 * @access protected
 		 * @return void
