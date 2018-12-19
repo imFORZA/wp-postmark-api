@@ -749,7 +749,7 @@ if ( ! class_exists( 'PostMarkAPI' ) ) {
 		 */
 		public function search_outbound_messages( $count = 50, $offset = 0, $recipient = null, $fromemail = null, $tag = null, $status = null, $todate = null, $fromdate = null ) {
 
-			$request = '/messages/outbound?count=' . $count . '&';
+			$request = '/messages/outbound?count=' . $count . '&offset=' . $offset;
 
 			$request .= http_build_query(array(
 				'offset'    => $offset,
